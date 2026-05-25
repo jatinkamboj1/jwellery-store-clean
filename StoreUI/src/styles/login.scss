@@ -1,0 +1,46 @@
+/*------ Start Login & Register Page ------*/
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.login-reg-form-wrap {
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    padding: 23px 30px 30px;
+  
+    @media only screen and (max-width: 575.98px) {
+      padding: 23px 15px 30px;
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    form {
+      .create-account {
+        margin-top: 25px;
+      }
+    }
+  
+    .login-reg-form-meta {
+      a {
+        color: var(--theme-active-color);
+      }
+    }
+  }
+  
+  // @media only screen and (min-width: 768px) and (max-width: 991px) {
+  //   .sign-up-form {
+  //     margin-top: 80px;
+  //   }
+  // }
+  
+  // @media only screen and (max-width: 767.98px) {
+  //   .sign-up-form {
+  //     margin-top: 62px;
+  //   }
+  // }
+  /*------ end Login & Register Page ------*/
+  

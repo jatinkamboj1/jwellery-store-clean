@@ -1,0 +1,279 @@
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7fafc;
+  padding: 1rem;
+}
+
+.mainContainer {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cartContainer {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cartTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.emptyCartMessage {
+  text-align: center;
+  color: #718096;
+}
+
+.cartItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.imageContainer {
+  width: 8rem;
+  height: 8rem;
+  flex-shrink: 0;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.detailsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100px;
+}
+
+.productName {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.productDescription {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.stockStatus {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.productColor {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.quantityButton {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.quantityInput {
+  width: 3rem;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+}
+
+.priceContainer {
+  margin-top: 0.5rem;
+}
+
+.productPrice {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.removeButton {
+  color: #e53e3e;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  float: right;
+}
+
+.priceDetailsContainer {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin: 10px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: red 2px;
+}
+
+.priceDetailsTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.priceDetailsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.totalAmountRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.savingsMessage {
+  font-size: 0.875rem;
+  color: #38a169;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.couponInput {
+  padding: 6px 10px;
+  width: calc(100% - 110px);
+  margin-right: 10px;
+}
+
+.applyButton {
+  padding: 8px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 5px;
+}
+
+.apply-coupon-wrapper {
+  margin-top: 20px;
+}
+
+.simple-popup {
+  position: fixed;
+   top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 9999;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-cart2:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .cartItem {
+    flex-wrap: wrap;
+    justify-content: center;
+    .productDescription {
+      display: none;
+    }
+    .stockStatus {
+      margin-bottom: 0;
+    }
+    .productPrice {
+      font-size: 0.8rem;
+    }
+    .removeButton span {
+      display: none;
+    }
+    .quantityControls {
+      width: 4.5rem;
+      .quantityInput {
+        width: auto;
+        min-width: 3rem;
+        line-height: normal;
+      }
+      .quantityButton {
+        height: auto;
+        line-height: 0;
+        padding: 0.5rem 0.5rem;
+        svg {
+          width: 0.7rem;
+          height: 0.7rem;
+        }
+      }
+    }
+    // .imageContainer {
+    //   width: 80%;
+    // }
+  }
+}
+
+@media (max-width: 450px) {
+  .imageContainer {
+    width: 6rem;
+    img {
+      object-fit: contain;
+    }
+  }
+  .productName {
+    font-size: 0.8rem;
+  }
+  .productVarient, .stockStatus {
+    font-size: 0.7rem;
+  }
+  .cartTitle, .priceDetailsTitle {
+    font-size: 1.2rem;
+  }
+}

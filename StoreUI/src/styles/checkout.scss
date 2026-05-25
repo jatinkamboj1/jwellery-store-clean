@@ -1,0 +1,251 @@
+/* Checkout Login Coupon Accordion Start */
+.address-select {
+  color: #555555;
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  font-size: 14px;
+  background: #f7f7f7;
+  margin-left: 10px;
+  &:focus {
+    outline: none;
+  }
+}
+.checkout-page-wrapper {
+    margin-bottom: -8px;
+  
+    @media only screen and (min-width: 768px) and (max-width: 991px),
+           only screen and (max-width: 767.98px) {
+      margin-bottom: 0;
+    }
+  }
+  
+  .checkoutaccordion {
+    margin-bottom: 46px;
+  
+    h6 {
+      background-color: #f7f7f7;
+      border-top: 3px solid var(--theme-active-color);
+      font-size: 14px;
+      padding: 15px 20px;
+      position: relative;
+      text-transform: capitalize;
+  
+      span {
+        color: var(--theme-active-color);
+        cursor: pointer;
+        transition: 0.4s;
+        margin-left: 10px;
+  
+        @media only screen and (max-width: 479.98px) {
+          display: block;
+          padding-top: 5px;
+          margin-left: 0;
+        }
+  
+        &:hover {
+          color: #222222;
+        }
+      }
+  
+      @media only screen and (max-width: 479.98px) {
+        font-size: 14px;
+      }
+    }
+  
+    .card {
+      border: none;
+      padding: 0;
+      transition: 0.4s;
+      margin-bottom: 30px;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+  
+      .card-body {
+        border: 1px solid #ccc;
+        font-size: 14px;
+        padding: 20px;
+  
+        .cart-update-option {
+          border: none;
+          padding: 0;
+  
+          .apply-coupon-wrapper input {
+            padding: 12px 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            margin-right: 15px;
+  
+            @media only screen and (max-width: 479.98px) {
+              margin-bottom: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .checkout-box-wrap .custom-control {
+    padding-left: 0;
+    margin-left: 1.5rem;
+  }
+  
+  .checkout-billing-details-wrap .billing-form-wrap {
+    margin-top: -20px;
+  }
+  
+  .checkout-title {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  
+    @media only screen and (max-width: 767.98px) {
+      margin-bottom: 26px;
+    }
+  }
+  
+  .forget-pwd {
+    color: var(--theme-active-color);
+    font-size: 12px;
+    margin-top: -6px;
+  }
+  
+  .single-form-row {
+    margin-top: 15px;
+    display: none;
+  
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .order-summary-details {
+      margin-top: 70px;
+    }
+  }
+  
+  @media only screen and (max-width: 767.98px) {
+    .order-summary-details {
+      margin-top: 52px;
+    }
+  }
+  
+  .order-summary-table {
+    background-color: #f7f7f7;
+    margin-top: 34px;
+  
+    .table,
+    table {
+      color: #222222;
+      margin-bottom: 0;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+  
+    .table tr td,
+    .table tr th,
+    table tr td,
+    table tr th {
+      font-weight: 400;
+      vertical-align: middle;
+      padding: 15px 10px;
+      border-width: 1px;
+    }
+  
+    .table tr td a,
+    .table tr th a,
+    table tr td a,
+    table tr th a {
+      color: #222222;
+      font-weight: 400;
+    }
+  
+    .table tr td strong,
+    .table tr th strong,
+    table tr td strong,
+    table tr th strong {
+      font-weight: 400;
+    }
+  
+    .shipping-type {
+      text-align: left;
+  
+      li {
+        margin-bottom: 5px;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    .table > :not(:last-child) > :last-child > * {
+      border-bottom-color: inherit;
+    }
+  }
+  
+  .order-payment-method {
+    background-color: #f7f7f7;
+    padding: 40px 20px 30px;
+  
+    @media only screen and (min-width: 768px) and (max-width: 991px),
+           only screen and (max-width: 767.98px) {
+      padding: 32px 20px 36px;
+    }
+  
+    .single-payment-method {
+      margin-bottom: 20px;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+  
+      &:first-child .payment-method-details {
+        display: block;
+      }
+  
+      label,
+      .custom-control-label {
+        font-weight: 700;
+      }
+  
+      .paypal-card {
+        max-width: 150px;
+        height: 50px;
+        margin-top: 10px;
+        display: block;
+      }
+  
+      .payment-method-details {
+        background-color: #f1f1f1;
+        color: #222222;
+        font-weight: 400;
+        font-size: 13px;
+        padding: 10px;
+        position: relative;
+        margin-top: 20px;
+        display: none;
+  
+        &:after {
+          content: "";
+          position: absolute;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 10px solid #f1f1f1;
+          bottom: 100%;
+        }
+  
+        * {
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  .summary-footer-area .btn-brand {
+    margin-top: 40px;
+  }
+  

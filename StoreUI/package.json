@@ -1,0 +1,45 @@
+{
+  "name": "jewelry_store",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@nextui-org/select": "^2.4.9",
+    "@tanstack/react-query": "^5.69.0",
+    "axios": "^1.7.9",
+    "cssnano": "^7.0.6",
+    "dotenv": "^16.4.7",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.475.0",
+    "next": "14.2.5",
+    "next-auth": "^4.24.11",
+    "next-sitemap": "^4.2.3",
+    "react": "^18",
+    "react-datepicker": "^8.2.1",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.5.1",
+    "react-icons": "^5.4.0",
+    "react-multi-carousel": "^2.8.5",
+    "react-phone-input-2": "^2.15.1",
+    "react-quill": "^2.0.0",
+    "react-range-slider-input": "^3.2.1",
+    "react-router-dom": "^7.1.3",
+    "react-select": "^5.9.0",
+    "react-toastify": "^11.0.3",
+    "reactjs-popup": "^2.0.6",
+    "sass": "^1.81.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.6",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.4.49"
+  }
+}

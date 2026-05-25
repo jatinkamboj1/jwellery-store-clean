@@ -1,0 +1,40 @@
+{
+  "name": "e-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd StoreUI && npm run dev",
+    "dev:backend": "cd StoreService && npm run dev",
+    
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd StoreUI && npm run start",
+    "start:backend": "cd StoreService && npm run start",
+
+    "build": "npm run build:frontend",
+    "build:frontend": "cd StoreUI && npm run build",
+    "build:backend": "cd StoreService && npm run build",
+    
+    "postinstall": "concurrently \"npm run postinstall:frontend\" \"npm run postinstall:backend\"",
+    "postinstall:frontend": "cd StoreUI && npm install",
+    "postinstall:backend": "cd StoreService && npm install",
+    
+    "start:electron": "concurrently \"npm run ui\" \"npm run electron\"",
+    "ui": "cd StoreUI && npm run start",
+    "electron": "cd StoreUI && npm run start-electron",
+    
+    "deploy": "cp StoreService && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tanstack/react-query": "^5.62.16",
+    "aws-sdk": "^2.1692.0",
+    "concurrently": "^8.2.2",
+    "next-auth": "^4.24.11",
+    "react-datepicker": "^7.6.0",
+    "react-hot-toast": "^2.5.1"
+    }
+}

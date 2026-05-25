@@ -1,0 +1,130 @@
+/*----- Google map area start -----*/
+#google-map {
+    height: 500px;
+    width: 100%;
+  
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      height: 400px;
+    }
+  
+    @media only screen and (max-width: 767.98px) {
+      height: 350px;
+    }
+  }
+  
+  /*----- Google map area end -----*/
+  
+  /*------ contact form area start -------*/
+  .contact-area {
+    margin-top: -4px;
+  
+    @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (max-width: 767.98px) {
+      margin-bottom: -5px;
+    }
+  }
+  
+  .contact-message {
+    h2 {
+      color: #222222;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1;
+      padding-bottom: 28px;
+      text-transform: capitalize;
+    }
+  
+    @media only screen and (max-width: 575.98px) {
+      h2 {
+        font-size: 18px;
+        padding-bottom: 15px;
+      }
+    }
+  
+    form {
+      input, textarea {
+        width: 100%;
+        border: none;
+        padding: 10px 10px;
+        border-bottom: 3px solid transparent;
+        background-color: #f7f7f7;
+        margin-bottom: 30px;
+      }
+  
+      textarea {
+        height: 150px;
+      }
+    }
+  }
+  /*------ contact form area end -------*/
+  
+  /*------ contact info area start -------*/
+  .contact-info {
+    height: 100%;
+  
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      margin-top: 77px;
+    }
+  
+    @media only screen and (max-width: 767.98px) {
+      margin-top: 60px;
+    }
+  
+    p {
+      padding-bottom: 30px;
+  
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        padding-bottom: 10px;
+      }
+    }
+  
+    ul {
+      li {
+        border-bottom: 1px solid #efefef;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+  
+        @media only screen and (max-width: 479.98px) {
+          align-items: baseline;
+        }
+  
+        &:last-child {
+          border-bottom: none;
+        }
+  
+        i {
+          font-size: 18px;
+          padding-right: 10px;
+        }
+      }
+    }
+  
+    .working-time {
+      h6 {
+        padding-bottom: 5px;
+      }
+  
+      p {
+        padding-bottom: 0;
+  
+        span {
+          color: #222222;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+  
+  .contact-title {
+    line-height: 1;
+    padding-bottom: 22px;
+  
+    @media only screen and (max-width: 575.98px) {
+      font-size: 18px;
+      padding-bottom: 8px;
+    }
+  }
+  
+  /*------ contact info area end -------*/
+  

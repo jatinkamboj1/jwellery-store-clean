@@ -1,0 +1,36 @@
+{
+  "name": "storeservice",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf ./dist && tsc",
+    "start:dev": "dotenv -e .env.development nodemon server.js",
+    "start": "dotenv -e .env.production node server.js",
+    "dev": "dotenv -e .env.development -- npx nodemon",
+    "migrate:postgres:dev": "dotenv -e .env.development -- npx prisma db push",
+    "migrate:postgres:prod": "dotenv -e .env.production -- npx prisma db push",
+    "remove": "rm -rf node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@azure/storage-blob": "^12.27.0",
+    "@faker-js/faker": "^9.5.1",
+    "@prisma/client": "^6.4.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0",
+    "prisma": "^6.4.1"
+  }
+}

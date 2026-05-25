@@ -1,0 +1,411 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String      @id @default(uuid())
+  name             String
+  email            String      @unique
+  phone            String      @unique
+  role             String      @default("USER")
+  country          String?
+  password         String?
+  website          String?
+  confirmedEmail   Boolean     @default(false)
+  confirmedPhone   Boolean     @default(false)
+  accountCreatedIn DateTime    @default(now())
+  otpExpiry        DateTime?
+  emailOtpExpiry   DateTime?
+  dateOfBirth      DateTime?
+  taxVatNumber     String?
+  gender           String?
+  otp              String? // Field to store OTP
+  emailOtp         String?
+  status           PhoneStatus @default(UNVERIFIED)
+  creditBalance    Float       @default(0.0)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  orders           Order[]
+  Wishlist         Wishlist[]
+  Discount         Discount[]
+  Address          Addresses[]
+  reviews          Review[]
+  Cart             Cart[]
+
+  @@index([phone, email])
+}
+
+enum PhoneStatus {
+  UNVERIFIED
+  VERIFIED
+}
+
+model Category {
+  id              String   @id @default(uuid())
+  categoryName    String
+  metaTitle       String?
+  description     String?
+  metaDescription String?
+  order           Int?    @default(0)
+  slug            String   @unique
+  keywords        String?
+  images          Image[]  @relation("CategoryImages")
+  tags            String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  url             String?  @unique
+  visible_on      String?
+  isParent        Boolean  @default(false)
+  childNames      String? // Use this if needed for additional info
+  isDisabled      Boolean  @default(false) // Field to manage visibility
+
+  // Self-referencing relationship
+  subCategories Category[] @relation("CategorySubcategories")
+  parent        Category?  @relation("CategorySubcategories", fields: [parentId], references: [id])
+  parentId      String?
+
+  // Many-to-many relationship with Product
+  products Product[] @relation("CategoryProducts")
+  Tag      Tag[]     @relation("CategoryTags")
+}
+
+model Tag {
+  id           String  @id @default(uuid()) // Unique identifier
+  name         String // Name of the tag
+  isCategory   Boolean @default(false) // Boolean flag
+  isMetal      Boolean @default(false)
+  isPolish     Boolean @default(false)
+  isStone      Boolean @default(false)
+  isOccasion   Boolean @default(false)
+  isCollection Boolean @default(false)
+
+  // Relations (if applicable)
+  product  Product[]  @relation("ProductTags")
+  category Category[] @relation("CategoryTags")
+
+  @@unique([name, isCategory], name: "name_isCategory")
+  @@index([name])
+}
+
+model Product {
+  id               String             @id @default(uuid())
+  vendor           String             @default("ADMIN")
+  name             String
+  keywords         String?
+  metaTitle        String?
+  metaDescription  String?
+  slug             String             @unique
+  type             String?
+  sku              String             @unique
+  price            Float
+  discountedPrice  Float?
+  quantity         Int
+  salableQuantity  Int?
+  visibility       Boolean            @default(true)
+  description      String?
+  shortDescription String?
+  brandName        String?
+  tags             String[]
+  metalType        String[]
+  polishType       String[]
+  stoneType        String[]
+  occasionType     String[]
+  collectionType   String[]
+  images           Image[]            @relation("ProductImages")
+  visible_on       String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  OrderProduct     OrderProduct[]
+  Wishlist         Wishlist[]
+  ProductVariant   ProductVariant[]
+  Category         Category[]         @relation("CategoryProducts")
+  Tag              Tag[]              @relation("ProductTags")
+  reviews          Review[]
+  ProductAttribute ProductAttribute[]
+  CartItem         CartItem[]
+
+  @@index([sku, slug])
+}
+
+model ProductVariant {
+  id                String             @id @default(uuid())
+  productId         String
+  product           Product            @relation(fields: [productId], references: [id])
+  description       String?
+  shortDescription  String?
+  variantName       String
+  metalType         String[]
+  polishType        String[]
+  stoneType         String[]
+  occasionType      String[]
+  collectionType    String[]
+  sku               String?
+  price             Float              @default(0.0)
+  discountedPrice   Float?
+  quantity          Int                @default(0)
+  salableQuantity   Int?               @default(0)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  variantAttributes VariantAttribute[]
+  OrderProduct      OrderProduct[]
+  ProductAttribute  ProductAttribute[]
+  CartItem          CartItem[]
+  images            Image[]
+
+  @@index([productId])
+}
+
+model VariantAttribute {
+  id               String          @id @default(uuid())
+  name             String
+  value            String
+  productVariantId String?
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])
+
+  @@index([name])
+}
+
+model ProductAttribute {
+  id               String          @id @default(uuid())
+  name             String
+  value            String
+  productVariantId String?
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])
+  productId        String?
+  product          Product?        @relation(fields: [productId], references: [id])
+
+  @@index([name])
+}
+
+model VariantType {
+  id   String @id @default(uuid())
+  name String
+
+  @@index([name])
+}
+
+enum ImageType {
+  BANNER
+  MOBILE
+  CARD
+  OTHER
+}
+
+model Image {
+  id          String   @id @default(uuid())
+  url         String
+  type        String
+  description String?
+  order       Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  product     Product? @relation("ProductImages", fields: [productId], references: [id])
+  productId   String?
+
+  testimonial   Testimonial? @relation("TestimonialImages", fields: [testimonialId], references: [id])
+  testimonialId String?
+
+  review   Review? @relation("ReviewImages", fields: [reviewId], references: [id])
+  reviewId String?
+
+  Category         Category[]      @relation("CategoryImages")
+  ProductVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])
+  productVariantId String?
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  review    String
+  rating    Int      @default(0) @db.SmallInt
+  isVisible Boolean  @default(true)
+  isValid   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  images  Image[] @relation("ReviewImages")
+
+  @@index([userId])
+  @@index([productId])
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  addedAt   DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@index([userId, productId])
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id])
+  products  CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+  Discount  Discount[] @relation("CartDiscounts")
+}
+
+model CartItem {
+  id               String          @id @default(uuid())
+  cartId           String
+  productId        String?
+  productVariantId String?
+  quantity         Int
+  cart             Cart            @relation(fields: [cartId], references: [id])
+  product          Product?        @relation(fields: [productId], references: [id])
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])
+}
+
+enum OrderPaid {
+  COD
+  ONLINE
+}
+
+enum OrderStatus {
+  CANCELLED
+  CONFIRMED
+  DELIVERED
+  INCART
+  PENDING
+  SHIPPED
+}
+
+model Order {
+  id                 String         @id @default(uuid())
+  userId             String
+  user               User?          @relation(fields: [userId], references: [id])
+  total              Float
+  actualAmount       Float
+  ShippingAmount     Float          @default(0.00)
+  status             OrderStatus
+  customerRemarks    String?
+  vendorRemarks      String?
+  paid               OrderPaid?
+  cancellationExpiry DateTime?
+  orderDate          DateTime?      @default(now())
+  products           OrderProduct[]
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @default(now())
+  Discount           Discount[]     @relation("OrderDiscounts")
+  mobileNumber       String?
+  userName           String?
+  orderNumber        Int            @default(autoincrement())
+
+  billingStreet  String?
+  billingCity    String?
+  billingState   String?
+  billingCountry String?
+  billingZip     String?
+}
+
+model OrderProduct {
+  id               String          @id @default(uuid())
+  orderId          String
+  productId        String?
+  productVariantId String?
+  quantity         Int
+  price            Float           @default(0.0)
+  order            Order           @relation(fields: [orderId], references: [id])
+  product          Product?        @relation(fields: [productId], references: [id])
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id])
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+  SHIPPING_FREE
+}
+
+model Discount {
+  id          String       @id @default(uuid())
+  code        String       @unique
+  description String?
+  type        DiscountType
+  amount      Float
+  status      Boolean      @default(true)
+  cartAmount  Json?        @default("{ \"min\": 0, \"max\": 0}")
+  startDate   DateTime?
+  endDate     DateTime?
+  orders      Order[]      @relation("OrderDiscounts")
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  usageLimit  Int          @default(1)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  cartId      String?
+  Cart        Cart[]       @relation("CartDiscounts")
+}
+
+enum AddressType {
+  SHIPPING
+  BILLING
+  BOTH
+}
+
+model Addresses {
+  id              String      @id @default(uuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id])
+  street          String
+  name            String
+  city            String
+  stateOrProvince String
+  country         String
+  zip             String
+  addressType     AddressType? // 'Shipping', 'Billing', etc.
+  isDefault       Boolean     @default(false) // Mark as the default address
+  createdAt       DateTime    @default(now())
+}
+
+model BannerImage {
+  id           String             @id @default(uuid())
+  url          String
+  link         String?
+  title        String
+  heading      String?
+  description  String?
+  order        Int?
+  type         String?
+  content_type BANNERCONTENTTYPE? @default(IMAGE)
+}
+
+enum BANNERCONTENTTYPE {
+  IMAGE
+  VIDEO
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  rating    Int      @default(5) @db.SmallInt
+  review    String
+  link      String?
+  createdAt DateTime @default(now())
+  images    Image[]  @relation("TestimonialImages")
+
+  @@index([rating])
+}
+
+model Contact {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String?
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}

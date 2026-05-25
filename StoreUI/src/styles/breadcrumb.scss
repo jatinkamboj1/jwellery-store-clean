@@ -1,0 +1,49 @@
+/*----- breadcrumb style css start -----*/
+.breadcrumb-area {
+    background-color: #f5f5f5;
+  }
+  
+  .breadcrumb-wrap {
+    padding: 24px 0;
+    text-align: center;
+  }
+  .breadcrumb-wrap .breadcrumb {
+    background: transparent;
+    margin-bottom: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .breadcrumb-wrap .breadcrumb .breadcrumb-item a {
+    color: #222222;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: capitalize;
+  }
+  .breadcrumb-wrap .breadcrumb .breadcrumb-item a:hover {
+    color: #c29958;
+  }
+  .breadcrumb-wrap .breadcrumb .breadcrumb-item:before {
+    color: #7e7e7e;
+    content: "/";
+    font-size: 12px;
+    margin: 0 5px;
+  }
+  .breadcrumb-wrap .breadcrumb .breadcrumb-item:first-child::before {
+    display: none;
+  }
+  .breadcrumb-wrap .breadcrumb .breadcrumb-item.active {
+    color: #c29958;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+  
+  /*----- breadcrumb style css end -----*/

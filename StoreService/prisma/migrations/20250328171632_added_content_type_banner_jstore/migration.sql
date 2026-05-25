@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "BANNERCONTENTTYPE" AS ENUM ('IMAGE', 'VIDEO');
+
+-- AlterTable
+ALTER TABLE "BannerImage" ADD COLUMN     "content_type" "BANNERCONTENTTYPE" DEFAULT 'IMAGE';

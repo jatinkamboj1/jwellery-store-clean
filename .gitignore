@@ -1,0 +1,7 @@
+node_modules
+.env
+.env.*
+StoreService/.env
+StoreService/.env.development
+StoreService/.env.production
+azure-pipelines.yml

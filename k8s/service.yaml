@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: __K8S_SERVICE_NAME_PLACEHOLDER__ # You can name this distinctively if you wish
+  labels:
+    app: __PROJECT_APP_NAME_PLACEHOLDER__ # Label to associate with the service itself
+    # Optional: Add a namespace if you want to create it via `kubectl apply`
+    # and your Jenkinsfile is not creating it.
+    # namespace: __PROJECT_NAME__ # Matches K8S_NAMESPACE in Jenkinsfile
+spec:
+  selector:
+    # This MUST match the labels of the Pods defined in your Deployment
+    # (deployment.yaml -> spec.template.metadata.labels.app)
+    app: __PROJECT_APP_NAME_PLACEHOLDER__
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80       # Port the service will listen on (e.g., for LoadBalancer or Ingress)
+      targetPort: http # Forwards traffic to the 'http' port (3000) on the pods
+  # Consider your exposure strategy:
+  # LoadBalancer: If you want an external IP from Azure.
+  # ClusterIP: If you're using an Ingress controller or for internal access only.
+  type: LoadBalancer

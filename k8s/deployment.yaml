@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # This name MUST match K8S_DEPLOYMENT_NAME in your Jenkinsfile
+  name: __K8S_DEPLOYMENT_NAME_PLACEHOLDER__
+  labels:
+    app: __PROJECT_APP_NAME_PLACEHOLDER__ # Label used by the service to find these pods
+    # Optional: Add a namespace if you want to create it via `kubectl apply`
+    # and your Jenkinsfile is not creating it.
+    # namespace: __PROJECT_NAME__ # Matches K8S_NAMESPACE in Jenkinsfile
+spec:
+  replicas: 1 # Number of desired pods
+  selector:
+    matchLabels:
+      app: __PROJECT_APP_NAME_PLACEHOLDER__ # Must match template.metadata.labels.app
+  template:
+    metadata:
+      labels:
+        app: __PROJECT_APP_NAME_PLACEHOLDER__ # Pods will have this label
+    spec:
+      containers:
+      - name: __K8S_CONTAINER_NAME_PLACEHOLDER__ # Name for the container
+        # This image path will be updated by your Jenkins pipeline.
+        # The placeholder __PROJECT_APP_NAME_PLACEHOLDER__ will be replaced first by Jenkins,
+        # then the existing sed command will update the tag.
+        image: codebiceps.azurecr.io/__PROJECT_APP_NAME_PLACEHOLDER__:latest # Placeholder tag, Jenkins will update
+        ports:
+        - name: http
+          containerPort: 3000 # Port your Next.js app listens on
+        # --- Optional but Recommended ---
+        # resources:
+        #   requests:
+        #     memory: "128Mi"
+        #     cpu: "0.25"
+        #   limits:
+        #     memory: "256Mi"
+        #     cpu: "0.5"
+        # livenessProbe:
+        #   httpGet:
+        #     path: /api/health # CHANGEME: Your health check endpoint
+        #     port: http
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /api/health # CHANGEME: Your health check endpoint
+        #     port: http
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 5

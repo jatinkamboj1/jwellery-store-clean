@@ -1,0 +1,2593 @@
+import json
+import csv
+
+# Sample dynamic JSON data
+data = [
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Screw": "/en/catalogue/screw-fw040201/",
+            "RiexTouch XP01 Screw profile, 320 mm, matt black": "/en/product/riextouch-xp01-screw-profile-320-mm-matt-black-fwf001443/"
+        },
+        "title": "RiexTouch XP01 Screw profile, 320 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mkakih5GtUpgs5GHRhE/FINAL/8x5yY6g_PaceMU9FAj3Ypw",
+        "code": "F001443",
+        "description": "Handle screw profile on the edge of the door, with screwing from the back side.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.78",
+            "CC Distance": "320 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "160"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 160 mm, matt black": "/en/product/riextouch-xh02-handle-160-mm-matt-black-fwf001246/"
+        },
+        "title": "RiexTouch XH02 Handle, 160 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLuTVsEs7xP6nZ3hldO/FINAL/FFHIsImxVqYyKUGFdb-m9g",
+        "code": "F001246",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.39",
+            "CC Distance": "160 mm",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH59 Handle, 320 mm, matt gold": "/en/product/citterio-giulio-xh59-handle-320-mm-matt-gold-fwf003275/"
+        },
+        "title": "Citterio Giulio XH59 Handle, 320 mm, matt gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MoJ6rE6jOXmv1LQoBoA/FINAL/tfHZOvaEN0ZMKFYzuHCAfw",
+        "code": "F003275",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Gold",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "320 mm",
+            "Catalogue Page": "4.11",
+            "Quantity in Box": "35",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 160 mm, brushed nickel": "/en/product/riextouch-xh01-handle-160-mm-brushed-nickel-fwf001586/"
+        },
+        "title": "RiexTouch XH01 Handle, 160 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NFsIL1YKR8lJ4_4HtPK/FINAL/YuZj2_OsUqZ28ZFfHbhmBQ",
+        "code": "F001586",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "160 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH05 Handle, 160 mm, polished chrome": "/en/product/riextouch-xh05-handle-160-mm-polished-chrome-fwf002804/"
+        },
+        "title": "RiexTouch XH05 Handle, 160 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NIHg08JiPU6BFk0aHdm/FINAL/2YZ6zekg9pCuMXmtvSLjgA",
+        "code": "F002804",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.31",
+            "Surface Finishing": "Polished",
+            "CC Distance": "160 mm",
+            "Material": "Steel",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH11 Handle, 320 mm, matt black": "/en/product/riextouch-xh11-handle-320-mm-matt-black-fwf002186/"
+        },
+        "title": "RiexTouch XH11 Handle, 320 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NoRcK5r12KxTx2z9Mp0/FINAL/CN7hqtW5gKp-ntQC6GxlwQ",
+        "code": "F002186",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.44",
+            "CC Distance": "320 mm",
+            "Quantity in Box": "25",
+            "Collection": "Erebos Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 128 mm, polished gold": "/en/product/riextouch-xh08-handle-128-mm-polished-gold-fwf002231/"
+        },
+        "title": "RiexTouch XH08 Handle, 128 mm, polished gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MrbDztuz_6jVPuIlKk2/FINAL/3by-OpEc3MBZs6Pg289xvg",
+        "code": "F002231",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Gold",
+            "Catalogue Page": "4.34",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH14 Handle, 256 mm, stainless steel": "/en/product/riextouch-xh14-handle-256-mm-stainless-steel-fwf002265/"
+        },
+        "title": "RiexTouch XH14 Handle, 256 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NVYi9EaQvXl_2nD7cmF/FINAL/FcBrQRQ2J7x03aUil-yUkQ",
+        "code": "F002265",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "256 mm",
+            "Material": "Stainless Steel",
+            "Collection": "Stylucia Line"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH14 Handle, 320 mm, stainless steel": "/en/product/riextouch-xh14-handle-320-mm-stainless-steel-fwf002266/"
+        },
+        "title": "RiexTouch XH14 Handle, 320 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NIWRD0aQg9dBGAbHU6S/FINAL/Xnt9OWaKvHnHjQ1HP8wE8A",
+        "code": "F002266",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "320 mm",
+            "Material": "Stainless Steel",
+            "Collection": "Stylucia Line"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 256 mm, polished chrome": "/en/product/riextouch-xh02-handle-256-mm-polished-chrome-fwf001236/"
+        },
+        "title": "RiexTouch XH02 Handle, 256 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLuwfRLXpM1U2M8Ki8u/FINAL/6WK31-TVXUu2wd7-YNRMOA",
+        "code": "F001236",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Polished",
+            "CC Distance": "256 mm",
+            "Quantity in Box": "25",
+            "Collection": "Horizon Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 96 mm, polished chrome": "/en/product/riextouch-xh01-handle-96-mm-polished-chrome-fwf001616/"
+        },
+        "title": "RiexTouch XH01 Handle, 96 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N-MaeJGYH37dilY_PFg/FINAL/YasMgsqXy-j2zkIvEzRjQQ",
+        "code": "F001616",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Polished",
+            "CC Distance": "96 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Connection Fittings": "/en/catalogue/connection-fittings-fw14/",
+            "Connecting Plates, Angles": "/en/catalogue/connecting-plates-angles-fw1409/",
+            "Connecting Plates": "/en/catalogue/connecting-plates-fw140901/",
+            "Riex JC46 Connection plate, 80x30 mm, T2, white zinc": "/en/product/riex-jc46-connection-plate-80x30-mm-t2-white-zinc-fwf004322/"
+        },
+        "title": "Riex JC46 Connection plate, 80x30 mm, T2, white zinc",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mti4KahHduWlrC0N84l/FINAL/OatNVQpE4cLt9yylRvMA0Q",
+        "code": "F004322",
+        "description": "A connecting plate for flat joining of boards with holes for countersunk head screws.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Zinc White",
+            "Catalogue Page": "14.64",
+            "Quantity in Box": "50"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Standard Double Wall Drawers": "/en/catalogue/standard-double-wall-drawers-fw0102/",
+            "Drawers": "/en/catalogue/drawers-fw010201/",
+            "Riex NX40 Double wall slide, basic drawer, 86/450 mm, grey": "/en/product/riex-nx40-double-wall-slide-basic-drawer-86-450-mm-grey-fwf000446/"
+        },
+        "title": "Riex NX40 Double wall slide, basic drawer, 86/450 mm, grey",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJ5YSKH_irpxZ0qeexj/FINAL/MjSrSxMJTglqeFVF4OXAEQ",
+        "code": "F000446",
+        "description": "Drawer assembly kit with double-wall side panels and soft closing slides. Set includes side panels, slides, front panel brackets and rear panel brackets. The drawer is quick and easy to assemble - only the cut-outs for the drawer base, back and front need to be made. The slides are equipped with a soft closing mechanism. The load capacity of the slides is 35kg, at this load the lifetime of the drawers is 60 thousand cycles. There are openings outside of the side panels for adjusting the position of the front panel vertically (up and down) and horizontally (left and right).",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Grey",
+            "Length": "450 mm",
+            "Mechanism": "Soft-close",
+            "Height": "86 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.22",
+            "Quantity in Box": "1",
+            "Model": "NX40"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH59 Handle, 160 mm, matt black": "/en/product/citterio-giulio-xh59-handle-160-mm-matt-black-fwf003271/"
+        },
+        "title": "Citterio Giulio XH59 Handle, 160 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mlp885DhxJi7IbsRuy-/FINAL/UNAS8OhR1PGIsb8_H3lzaQ",
+        "code": "F003271",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "160 mm",
+            "Catalogue Page": "4.11",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH59 Handle, 160 mm, matt gold": "/en/product/citterio-giulio-xh59-handle-160-mm-matt-gold-fwf003272/"
+        },
+        "title": "Citterio Giulio XH59 Handle, 160 mm, matt gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MlniQELralj3cH5oQLb/FINAL/qV1xdDh2wHsE3OUMPPLhrQ",
+        "code": "F003272",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Gold",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "160 mm",
+            "Catalogue Page": "4.11",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH59 Handle, 320 mm, matt black": "/en/product/citterio-giulio-xh59-handle-320-mm-matt-black-fwf003274/"
+        },
+        "title": "Citterio Giulio XH59 Handle, 320 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N5-FJjGTNJX1_RUZryx/FINAL/wSzKBUecWymsicWpxDtvyA",
+        "code": "F003274",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "320 mm",
+            "Catalogue Page": "4.11",
+            "Quantity in Box": "35",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH60 Handle, 160 mm, matt black": "/en/product/citterio-giulio-xh60-handle-160-mm-matt-black-fwf003280/"
+        },
+        "title": "Citterio Giulio XH60 Handle, 160 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mlp7YDwWxp4gydiK30O/FINAL/irf4kisxYv87q_xPF5wCBQ",
+        "code": "F003280",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "160 mm",
+            "Catalogue Page": "4.10",
+            "Quantity in Box": "50",
+            "Material": "Zamac, Aluminium"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH60 Handle, 160 mm, matt gold": "/en/product/citterio-giulio-xh60-handle-160-mm-matt-gold-fwf003281/"
+        },
+        "title": "Citterio Giulio XH60 Handle, 160 mm, matt gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mlp6TnGbUbOzLuKO6-d/FINAL/EjNQ-6QqPRybuohPkG9O9Q",
+        "code": "F003281",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Gold",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "160 mm",
+            "Catalogue Page": "4.10",
+            "Quantity in Box": "50",
+            "Material": "Zamac, Aluminium"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH60 Handle, 320 mm, matt black": "/en/product/citterio-giulio-xh60-handle-320-mm-matt-black-fwf003283/"
+        },
+        "title": "Citterio Giulio XH60 Handle, 320 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N42XG67caG0y7WtADMW/NORMAL/I23_K4cmTVcLs5tlf8oRVA",
+        "code": "F003283",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "320 mm",
+            "Catalogue Page": "4.10",
+            "Quantity in Box": "50",
+            "Material": "Zamac, Aluminium"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "Citterio Giulio XH60 Handle, 320 mm, matt gold": "/en/product/citterio-giulio-xh60-handle-320-mm-matt-gold-fwf003284/"
+        },
+        "title": "Citterio Giulio XH60 Handle, 320 mm, matt gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MoI56YTVIlwPXgFndTw/FINAL/aZ3H7MigNueje_YxIKeQUg",
+        "code": "F003284",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Colour": "Gold",
+            "Brand": "Citterio Giulio",
+            "CC Distance": "320 mm",
+            "Catalogue Page": "4.10",
+            "Quantity in Box": "50",
+            "Material": "Zamac, Aluminium"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Screw": "/en/catalogue/screw-fw040201/",
+            "RiexTouch XP01 Screw profile, 160 mm, anodised aluminium": "/en/product/riextouch-xp01-screw-profile-160-mm-anodised-aluminium-fwf001432/"
+        },
+        "title": "RiexTouch XP01 Screw profile, 160 mm, anodised aluminium",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N4lMNAzQkfAbS3DRIZ_/FINAL/9PVTf0uSl1Y-YP-ht89HTQ",
+        "code": "F001432",
+        "description": "Handle screw profile on the edge of the door, with screwing from the back side.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Anodised Aluminium",
+            "Catalogue Page": "4.78",
+            "CC Distance": "160 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "160"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Screw": "/en/catalogue/screw-fw040201/",
+            "RiexTouch XP01 Screw profile, 320 mm, anodised aluminium": "/en/product/riextouch-xp01-screw-profile-320-mm-anodised-aluminium-fwf001433/"
+        },
+        "title": "RiexTouch XP01 Screw profile, 320 mm, anodised aluminium",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NKx8JUmfXPoYQmLQJWJ/FINAL/RdlOlmZv97BjOANF9OkY8Q",
+        "code": "F001433",
+        "description": "Handle screw profile on the edge of the door, with screwing from the back side.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Anodised Aluminium",
+            "Catalogue Page": "4.78",
+            "CC Distance": "320 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "160"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Screw": "/en/catalogue/screw-fw040201/",
+            "RiexTouch XP01 Screw profile, 160 mm, matt black": "/en/product/riextouch-xp01-screw-profile-160-mm-matt-black-fwf001441/"
+        },
+        "title": "RiexTouch XP01 Screw profile, 160 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NKx4cVgDqNCBgVNK3qf/FINAL/r0z5ikeRQrk62HAApnwAJg",
+        "code": "F001441",
+        "description": "Handle screw profile on the edge of the door, with screwing from the back side.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.78",
+            "CC Distance": "160 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "160"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Screw": "/en/catalogue/screw-fw040201/",
+            "RiexTouch XP01 Screw profile, 32 mm, matt black": "/en/product/riextouch-xp01-screw-profile-32-mm-matt-black-fwf001444/"
+        },
+        "title": "RiexTouch XP01 Screw profile, 32 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NKxDwOwjG3vCPdmae0A/FINAL/1dAM5IM2O0-oHIGU7UuGfQ",
+        "code": "F001444",
+        "description": "Handle screw profile on the edge of the door, with screwing from the back side.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.78",
+            "CC Distance": "32 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "320"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Drive-in - Standard lengths": "/en/catalogue/drive-in-standard-lengths-fw040202/",
+            "RiexTouch XP45 Drive-in profile, 196 mm, stainless steel imitation": "/en/product/riextouch-xp45-drive-in-profile-196-mm-stainless-steel-imitation-fwf001487/"
+        },
+        "title": "RiexTouch XP45 Drive-in profile, 196 mm, stainless steel imitation",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mkasu-UUsmNJlhIkH5D/FINAL/to1svKwMHl1gdCSnqmQtTQ",
+        "code": "F001487",
+        "description": "Handle drive-in profile into the groove in the door edge.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel Imitation",
+            "Surface Finishing": "Brushed",
+            "Catalogue Page": "4.79",
+            "Length": "196 mm",
+            "Material": "Aluminium",
+            "Quantity in Box": "35"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handle Profiles": "/en/catalogue/handle-profiles-fw0402/",
+            "Drive-in - Standard lengths": "/en/catalogue/drive-in-standard-lengths-fw040202/",
+            "RiexTouch XP45 Drive-in profile, 396 mm, stainless steel imitation": "/en/product/riextouch-xp45-drive-in-profile-396-mm-stainless-steel-imitation-fwf001489/"
+        },
+        "title": "RiexTouch XP45 Drive-in profile, 396 mm, stainless steel imitation",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Ng3gjJX5NJTLnh9xZg2/FINAL/x-Cqm6UEn_GMS3KhWlEzFg",
+        "code": "F001489",
+        "description": "Handle drive-in profile into the groove in the door edge.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel Imitation",
+            "Surface Finishing": "Brushed",
+            "Length": "396 mm",
+            "Catalogue Page": "4.79",
+            "Material": "Aluminium",
+            "Quantity in Box": "35"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 96 mm, brushed nickel": "/en/product/riextouch-xh01-handle-96-mm-brushed-nickel-fwf001584/"
+        },
+        "title": "RiexTouch XH01 Handle, 96 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mi1EvN6f0Tcx9l1czp2/FINAL/F9ersPWB6q1fjQNZ8CGcEg",
+        "code": "F001584",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "96 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 256 mm, brushed nickel": "/en/product/riextouch-xh01-handle-256-mm-brushed-nickel-fwf001589/"
+        },
+        "title": "RiexTouch XH01 Handle, 256 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJiij4ck4En91jpZmoQ/FINAL/u0mbH-JJaeITep-i7U5BOw",
+        "code": "F001589",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "256 mm",
+            "Material": "Steel",
+            "Quantity in Box": "10"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 320 mm, brushed nickel": "/en/product/riextouch-xh01-handle-320-mm-brushed-nickel-fwf001591/"
+        },
+        "title": "RiexTouch XH01 Handle, 320 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NFwjgJG0A87ZZJCi-62/FINAL/jhB45_8rMMnvyFBDYkxLhA",
+        "code": "F001591",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "320 mm",
+            "Material": "Steel",
+            "Quantity in Box": "10"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 224 mm, matt nickel": "/en/product/riextouch-xh01-handle-224-mm-matt-nickel-fwf001604/"
+        },
+        "title": "RiexTouch XH01 Handle, 224 mm, matt nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJiXK_kAv2wQwP-bNcu/FINAL/LNEnyqWNLMpotwlC6swIEw",
+        "code": "F001604",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.29",
+            "CC Distance": "224 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "RiexTouch XK05 Knob, matt gold": "/en/product/riextouch-xk05-knob-matt-gold-fwf002273/"
+        },
+        "title": "RiexTouch XK05 Knob, matt gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Nl8HdjMQEvLC1W52nFl/FINAL/40uZMOdMqKaXqQEjiMuz8A",
+        "code": "F002273",
+        "description": "Metal knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Gold",
+            "Catalogue Page": "4.54",
+            "Material": "Aluminium",
+            "Quantity in Box": "50"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "Citterio Giulio XD04 Knob, blue": "/en/product/citterio-giulio-xd04-knob-blue-fwf003204/"
+        },
+        "title": "Citterio Giulio XD04 Knob, blue",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MlsHFh4nhahmPYfn0Mv/FINAL/U3RZR8R9s8QxsW7VeQToJQ",
+        "code": "F003204",
+        "description": "Plastic knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Brand": "Citterio Giulio",
+            "Colour": "Blue",
+            "Catalogue Page": "4.68",
+            "Quantity in Box": "40",
+            "Material": "Zamac, Rubber"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "Citterio Giulio XD04 Knob, pink": "/en/product/citterio-giulio-xd04-knob-pink-fwf003205/"
+        },
+        "title": "Citterio Giulio XD04 Knob, pink",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N2Gn1-Gr8Bl5QfxLyht/FINAL/BM2UymTBMP4u9umxky9Rdg",
+        "code": "F003205",
+        "description": "Plastic knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Surface Finishing": "Matt",
+            "Brand": "Citterio Giulio",
+            "Colour": "Pink",
+            "Catalogue Page": "4.68",
+            "Quantity in Box": "40",
+            "Material": "Zamac, Rubber"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "RiexTouch XK10 Knob, matt chrome": "/en/product/riextouch-xk10-knob-matt-chrome-fwf002137/"
+        },
+        "title": "RiexTouch XK10 Knob, matt chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NrKMGc5me3oL-yBfUU6/FINAL/1XdgmTuCNScTsNfX6Tavyg",
+        "code": "F002137",
+        "description": "Metal knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.61",
+            "Quantity in Box": "100",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "RiexTouch XK10 Knob, polished chrome": "/en/product/riextouch-xk10-knob-polished-chrome-fwf002138/"
+        },
+        "title": "RiexTouch XK10 Knob, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1IkE6yduB_OLaCYcpV/FINAL/sVMlWm2A6bvppZLqfWJcqw",
+        "code": "F002138",
+        "description": "Metal knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Surface Finishing": "Polished",
+            "Catalogue Page": "4.61",
+            "Quantity in Box": "100",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Knobs": "/en/catalogue/knobs-fw040103/",
+            "RiexTouch XK12 Knob, polished chrome": "/en/product/riextouch-xk12-knob-polished-chrome-fwf002250/"
+        },
+        "title": "RiexTouch XK12 Knob, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MrXOLA29PArweNgkUtQ/FINAL/5sEDy7R89CNEpKICEn-Kfg",
+        "code": "F002250",
+        "description": "Metal knob with screw for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Surface Finishing": "Polished",
+            "Catalogue Page": "4.55",
+            "Quantity in Box": "50",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH05 Handle, 128 mm, polished chrome": "/en/product/riextouch-xh05-handle-128-mm-polished-chrome-fwf002803/"
+        },
+        "title": "RiexTouch XH05 Handle, 128 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MkHlhthBKrNOBVM8M6C/FINAL/ST6Hc6TmXvalUVFMAs9Luw",
+        "code": "F002803",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.31",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Material": "Steel",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH05 Handle, 160 mm, brushed nickel": "/en/product/riextouch-xh05-handle-160-mm-brushed-nickel-fwf002810/"
+        },
+        "title": "RiexTouch XH05 Handle, 160 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N6MBy-iIhalGZXt-kbS/FINAL/z0pt-5TChx_WPgr01Te_WA",
+        "code": "F002810",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.31",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "160 mm",
+            "Material": "Steel",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH05 Handle, 128 mm, polished gold": "/en/product/riextouch-xh05-handle-128-mm-polished-gold-fwf002815/"
+        },
+        "title": "RiexTouch XH05 Handle, 128 mm, polished gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MdQTh_bpgvG29bh9r50/FINAL/lGtVfabruGCViYzpTkibmQ",
+        "code": "F002815",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Gold",
+            "Catalogue Page": "4.31",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Material": "Steel",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH05 Handle, 160 mm, polished gold": "/en/product/riextouch-xh05-handle-160-mm-polished-gold-fwf002816/"
+        },
+        "title": "RiexTouch XH05 Handle, 160 mm, polished gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N41StpTfQaIUdEnoquK/FINAL/U_Y47_UHbhAmK4Bn5bvExQ",
+        "code": "F002816",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Gold",
+            "Catalogue Page": "4.31",
+            "Surface Finishing": "Polished",
+            "CC Distance": "160 mm",
+            "Material": "Steel",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH34 Handle, 128 mm, matt chrome": "/en/product/riextouch-xh34-handle-128-mm-matt-chrome-fwf002124/"
+        },
+        "title": "RiexTouch XH34 Handle, 128 mm, matt chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MkHFpYwe2gEdSCDOHCm/FINAL/25_SKesYw0K-eHc_pIaa5g",
+        "code": "F002124",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.60",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "30",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH34 Handle, 128 mm, polished chrome": "/en/product/riextouch-xh34-handle-128-mm-polished-chrome-fwf002126/"
+        },
+        "title": "RiexTouch XH34 Handle, 128 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NkUstAi9piBiijl35jf/FINAL/3I6gZGbcqeQPxbKX_-aBeQ",
+        "code": "F002126",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.60",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "30",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH11 Handle, 128 mm, matt black": "/en/product/riextouch-xh11-handle-128-mm-matt-black-fwf002183/"
+        },
+        "title": "RiexTouch XH11 Handle, 128 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NlcM06ImdxREBFQVmA_/FINAL/aZ4dkzjURD8Q3PgnZBF_2Q",
+        "code": "F002183",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.44",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Collection": "Erebos Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH11 Handle, 160 mm, matt black": "/en/product/riextouch-xh11-handle-160-mm-matt-black-fwf002184/"
+        },
+        "title": "RiexTouch XH11 Handle, 160 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Nlc8sxx73FXP2Q-gp3o/FINAL/cuIysgl9rckY92SxyDF8LQ",
+        "code": "F002184",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.44",
+            "CC Distance": "160 mm",
+            "Quantity in Box": "25",
+            "Collection": "Erebos Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 128 mm, polished chrome": "/en/product/riextouch-xh08-handle-128-mm-polished-chrome-fwf002225/"
+        },
+        "title": "RiexTouch XH08 Handle, 128 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MraswdgUJhAjERRarKf/FINAL/qZHMni_GL6QWX25IREldZg",
+        "code": "F002225",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.34",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 128 mm, matt chrome": "/en/product/riextouch-xh08-handle-128-mm-matt-chrome-fwf002227/"
+        },
+        "title": "RiexTouch XH08 Handle, 128 mm, matt chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MrbGoQKq2qk1Tu637Lz/FINAL/KqkqmHmhF2ec-uDv7J6ffg",
+        "code": "F002227",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.34",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 128 mm, matt nickel": "/en/product/riextouch-xh08-handle-128-mm-matt-nickel-fwf002229/"
+        },
+        "title": "RiexTouch XH08 Handle, 128 mm, matt nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MwfF09WSUvf5ZzL-Brj/FINAL/dLz-40yAvC8bwgLDGMsvyA",
+        "code": "F002229",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.34",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 96 mm, polished gold": "/en/product/riextouch-xh08-handle-96-mm-polished-gold-fwf002230/"
+        },
+        "title": "RiexTouch XH08 Handle, 96 mm, polished gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NIWT1xjzjnY29G7Exac/FINAL/bxwL0FdrD2Ul_66iuuEb_w",
+        "code": "F002230",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Gold",
+            "Catalogue Page": "4.34",
+            "Surface Finishing": "Polished",
+            "CC Distance": "96 mm",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH08 Handle, 128 mm, brushed nickel": "/en/product/riextouch-xh08-handle-128-mm-brushed-nickel-fwf002233/"
+        },
+        "title": "RiexTouch XH08 Handle, 128 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NnJ5x4qhYI8Ov16-m3m/FINAL/43wFAxzHUqn2I9LefepNVw",
+        "code": "F002233",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.34",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "25",
+            "Collection": "Stylucia Line",
+            "Material": "Zinc"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH14 Handle, 128 mm, stainless steel": "/en/product/riextouch-xh14-handle-128-mm-stainless-steel-fwf002261/"
+        },
+        "title": "RiexTouch XH14 Handle, 128 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N41DTMTLz2dL1WhHIp6/FINAL/cpg2BGZ9kvse3e_cEwxgmw",
+        "code": "F002261",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "128 mm",
+            "Material": "Stainless Steel",
+            "Collection": "Stylucia Line"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH14 Handle, 160 mm, stainless steel": "/en/product/riextouch-xh14-handle-160-mm-stainless-steel-fwf002262/"
+        },
+        "title": "RiexTouch XH14 Handle, 160 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NU0SPlTz2B3fF-CYE_P/FINAL/uxPRxSWbfD2mPyMJXy8dlQ",
+        "code": "F002262",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "160 mm",
+            "Material": "Stainless Steel",
+            "Collection": "Stylucia Line"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH14 Handle, 192 mm, stainless steel": "/en/product/riextouch-xh14-handle-192-mm-stainless-steel-fwf002263/"
+        },
+        "title": "RiexTouch XH14 Handle, 192 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NVYgExuLsk4lJbPgb4R/FINAL/Wl1peINiVuVvNmQZPn0RGw",
+        "code": "F002263",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "192 mm",
+            "Material": "Stainless Steel",
+            "Collection": "Stylucia Line"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Concealed Slides": "/en/catalogue/concealed-slides-fw0103/",
+            "Full Extension": "/en/catalogue/full-extension-fw010302/",
+            "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 300 mm, 3D brackets": "/en/product/riex-nu80-19mm-concealed-slide-full-extension-soft-close-synchro-40-kg-300-mm-3d-brackets-fwf000162/"
+        },
+        "title": "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 300 mm, 3D brackets",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N2LSyH46ADddS9aUmBF/FINAL/Bus6l8dovGiK8mYIIxs7Cg",
+        "code": "F000162",
+        "description": "Concealed drawer slide with mounting under the drawer bottom for all-wood drawers with soft closing function. The drawer is equipped with a synchronisation mechanism for smooth operation of the individual slide segments. The total load capacity including the weight of the drawer is 40 kg, at this load the drawer has a very good durability for many years. The length of the extension is the same as the length of the drawer (it is a full extension). The slides are connected to the drawer with brackets that allow the drawer front to be adjusted vertically (up and down), horizontally (left and right) and also gap between the front and cabinet can be adjusted. Thickness of side panels of drawer can be up to 19mm.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "300 mm",
+            "Loading Capacity": "40 kg",
+            "Mechanism": "Soft-close",
+            "Synchronisation": "Yes",
+            "Brackets": "3D",
+            "Catalogue Page": "1.38",
+            "Quantity in Box": "10",
+            "Board Thickness": "19 mm"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Concealed Slides": "/en/catalogue/concealed-slides-fw0103/",
+            "Full Extension": "/en/catalogue/full-extension-fw010302/",
+            "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 400 mm, 3D brackets": "/en/product/riex-nu80-19mm-concealed-slide-full-extension-soft-close-synchro-40-kg-400-mm-3d-brackets-fwf000164/"
+        },
+        "title": "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 400 mm, 3D brackets",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1mO1QBft4y744FSZqY/FINAL/kxsxwYAJigv68MGx-NcCUA",
+        "code": "F000164",
+        "description": "Concealed drawer slide with mounting under the drawer bottom for all-wood drawers with soft closing function. The drawer is equipped with a synchronisation mechanism for smooth operation of the individual slide segments. The total load capacity including the weight of the drawer is 40 kg, at this load the drawer has a very good durability for many years. The length of the extension is the same as the length of the drawer (it is a full extension). The slides are connected to the drawer with brackets that allow the drawer front to be adjusted vertically (up and down), horizontally (left and right) and also gap between the front and cabinet can be adjusted. Thickness of side panels of drawer can be up to 19mm.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "400 mm",
+            "Loading Capacity": "40 kg",
+            "Mechanism": "Soft-close",
+            "Synchronisation": "Yes",
+            "Brackets": "3D",
+            "Catalogue Page": "1.38",
+            "Quantity in Box": "10",
+            "Board Thickness": "19 mm"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Concealed Slides": "/en/catalogue/concealed-slides-fw0103/",
+            "Full Extension": "/en/catalogue/full-extension-fw010302/",
+            "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 450 mm, 3D brackets": "/en/product/riex-nu80-19mm-concealed-slide-full-extension-soft-close-synchro-40-kg-450-mm-3d-brackets-fwf000165/"
+        },
+        "title": "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 450 mm, 3D brackets",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1m-WYJboyZHnka5r_J/FINAL/Cz9_bbgI-youzaibLw8rEA",
+        "code": "F000165",
+        "description": "Concealed drawer slide with mounting under the drawer bottom for all-wood drawers with soft closing function. The drawer is equipped with a synchronisation mechanism for smooth operation of the individual slide segments. The total load capacity including the weight of the drawer is 40 kg, at this load the drawer has a very good durability for many years. The length of the extension is the same as the length of the drawer (it is a full extension). The slides are connected to the drawer with brackets that allow the drawer front to be adjusted vertically (up and down), horizontally (left and right) and also gap between the front and cabinet can be adjusted. Thickness of side panels of drawer can be up to 19mm.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "450 mm",
+            "Loading Capacity": "40 kg",
+            "Mechanism": "Soft-close",
+            "Synchronisation": "Yes",
+            "Brackets": "3D",
+            "Catalogue Page": "1.38",
+            "Quantity in Box": "10",
+            "Board Thickness": "19 mm"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Concealed Slides": "/en/catalogue/concealed-slides-fw0103/",
+            "Full Extension": "/en/catalogue/full-extension-fw010302/",
+            "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 500 mm, 3D brackets": "/en/product/riex-nu80-19mm-concealed-slide-full-extension-soft-close-synchro-40-kg-500-mm-3d-brackets-fwf000166/"
+        },
+        "title": "Riex NU80 (19mm) Concealed slide, full extension, soft-close, synchro, 40 kg, 500 mm, 3D brackets",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1mo2dngXEFCwgcZDBR/FINAL/CYVQbIYOy7cqAUbqtaPvkQ",
+        "code": "F000166",
+        "description": "Concealed drawer slide with mounting under the drawer bottom for all-wood drawers with soft closing function. The drawer is equipped with a synchronisation mechanism for smooth operation of the individual slide segments. The total load capacity including the weight of the drawer is 40 kg, at this load the drawer has a very good durability for many years. The length of the extension is the same as the length of the drawer (it is a full extension). The slides are connected to the drawer with brackets that allow the drawer front to be adjusted vertically (up and down), horizontally (left and right) and also gap between the front and cabinet can be adjusted. Thickness of side panels of drawer can be up to 19mm.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "500 mm",
+            "Loading Capacity": "40 kg",
+            "Mechanism": "Soft-close",
+            "Synchronisation": "Yes",
+            "Brackets": "3D",
+            "Catalogue Page": "1.38",
+            "Quantity in Box": "10",
+            "Board Thickness": "19 mm"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Concealed Slides": "/en/catalogue/concealed-slides-fw0103/",
+            "Full Extension": "/en/catalogue/full-extension-fw010302/",
+            "Riex NU70 Concealed slide, full extension, push for open, synchro, 35 kg, 450 mm, 2D brackets": "/en/product/riex-nu70-concealed-slide-full-extension-push-for-open-synchro-35-kg-450-mm-2d-brackets-fwf000174/"
+        },
+        "title": "Riex NU70 Concealed slide, full extension, push for open, synchro, 35 kg, 450 mm, 2D brackets",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1biKZ92n9sa9VV1Fhl/FINAL/iLELcRAIM5zTk1ycuuRo5w",
+        "code": "F000174",
+        "description": "Concealed drawer slide with mounting under the drawer bottom for all-wood drawers with handleless opening function. The drawer is equipped with a synchronisation mechanism for smooth operation of the individual slide segments. The total load capacity including the weight of the drawer is 35 kg, at this load the drawer has a very good durability for many years. The length of the extension is the same as the length of the drawer (it is a full extension). The opening force of the drawer can be controlled by a sliding lever. The slides are connected to the drawer with brackets that allow the drawer front to be adjusted both vertically (up and down) and horizontally (left and right). Thickness of side panels of drawer can be up to 19mm.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "450 mm",
+            "Synchronisation": "Yes",
+            "Loading Capacity": "35 kg",
+            "Brackets": "2D",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.39",
+            "Board Thickness": "19 mm"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/20 kg, H45, 300 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-20-kg-h45-300-mm-nickel-fwf000808/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/20 kg, H45, 300 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaR28pirpT6is2MniE/FINAL/aKqK6qiCphx6xfR-CUJjbw",
+        "code": "F000808",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "300 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/25 kg, H45, 350 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-25-kg-h45-350-mm-nickel-fwf000809/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/25 kg, H45, 350 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaFaanLKtMEjLOqgCs/FINAL/LcdiinE2JV33ocnDh28rLA",
+        "code": "F000809",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "350 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/30 kg, H45, 400 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-30-kg-h45-400-mm-nickel-fwf000810/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/30 kg, H45, 400 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaGfLU9P5NTqfEbLwa/FINAL/oY4_xdQhr2D_srSVevyIlQ",
+        "code": "F000810",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "400 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/35 kg, H45, 450 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-35-kg-h45-450-mm-nickel-fwf000811/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/35 kg, H45, 450 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaHmauSFPJ4IYrncmh/FINAL/FvbSE2C5cXbNaf6-mMBeIQ",
+        "code": "F000811",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "450 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/35 kg, H45, 500 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-35-kg-h45-500-mm-nickel-fwf000812/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/35 kg, H45, 500 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mgt5b6KWxVruXOs4cz2/FINAL/atBWeP0ng37PsftutdezUA",
+        "code": "F000812",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "500 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/30 kg, H45, 550 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-30-kg-h45-550-mm-nickel-fwf000813/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/30 kg, H45, 550 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaKnPpGqss9X8D-pJF/FINAL/2VNQl0alwLk8Ibays8qa3w",
+        "code": "F000813",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "550 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/25 kg, H45, 600 mm, nickel": "/en/product/riex-nb58-ball-bearing-slide-full-extension-soft-close-35-kg-25-kg-h45-600-mm-nickel-fwf000814/"
+        },
+        "title": "Riex NB58 Ball bearing slide, full extension, soft-close, 35 kg/25 kg, H45, 600 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLaPdXmQRB2kkxOsVG4/FINAL/lYvUcRTZxa79n5PAZx9juw",
+        "code": "F000814",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1.2, 1.2 and 1.5mm. The drawer is equipped with soft-closing mechanism with closing spring and oil damper for slow closing. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Length": "600 mm",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,2*1,2*1,5 mm",
+            "Loading Capacity": "35 kg",
+            "Catalogue Page": "1.46",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/19 kg, H45, 300 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-19-kg-h45-300-mm-nickel-fwf000815/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/19 kg, H45, 300 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NAOSJ_Godjm6F1RCgEF/FINAL/1WbBuGak0jRcwQjTY8SQ1w",
+        "code": "F000815",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "300 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/26 kg, H45, 350 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-26-kg-h45-350-mm-nickel-fwf000816/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/26 kg, H45, 350 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NAOcDn-NHTltpLv2mrR/FINAL/kjO-2qhrTaeKMBrICpFXUA",
+        "code": "F000816",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "350 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/30 kg, H45, 400 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-30-kg-h45-400-mm-nickel-fwf000817/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/30 kg, H45, 400 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NBuiHxK1eKkol7nEeZh/FINAL/KV7-KcqOOrIMDtbNXJ53kA",
+        "code": "F000817",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "400 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/35 kg, H45, 450 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-35-kg-h45-450-mm-nickel-fwf000818/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/35 kg, H45, 450 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NCJWD61ooYRttxR2Jn9/FINAL/ZctKjHRzCJozZpbI9wjBnQ",
+        "code": "F000818",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "450 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/35 kg, H45, 500 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-35-kg-h45-500-mm-nickel-fwf000819/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/35 kg, H45, 500 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NoRJzIzUeXeDopaUFJE/FINAL/WQz4l0mzIhYD8He3sUJ-Ow",
+        "code": "F000819",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "500 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/33 kg, H45, 550 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-33-kg-h45-550-mm-nickel-fwf000820/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/33 kg, H45, 550 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NCJVPyPv80PgLyXE9-d/FINAL/230rMkYfFGJzPt4w2TZhuw",
+        "code": "F000820",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "550 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/33 kg, H45, 600 mm, nickel": "/en/product/riex-nb51-ball-bearing-slide-full-extension-pushforopen-35-kg-33-kg-h45-600-mm-nickel-fwf000821/"
+        },
+        "title": "Riex NB51 Ball bearing slide, full extension, PushForOpen, 35 kg/33 kg, H45, 600 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NCJZIu9uuy7KnVqUDJK/FINAL/J0OpggCt4eHkwcsOWJ6QJg",
+        "code": "F000821",
+        "description": "45mm ball-bearing slide for all-wood drawers. The extension length is the same as its nominal length (full extension). This is a solid drawer slide, the thicknesses of the materials used are 1, 1 and 1.2mm. The drawer is equipped with push to open mechanism. For easy installation, the drawer profile can be separated from the rest of the drawer, screwed onto the drawer and then pushed back in.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "600 mm",
+            "Height": "45 mm",
+            "Loading Capacity": "35 kg",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Mechanism": "Push for Open",
+            "Catalogue Page": "1.48",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB48 Ball bearing slide, full extension, soft-close, 30 kg/26 kg, H45, 400 mm, nickel": "/en/product/riex-nb48-ball-bearing-slide-full-extension-soft-close-30-kg-26-kg-h45-400-mm-nickel-fwf002915/"
+        },
+        "title": "Riex NB48 Ball bearing slide, full extension, soft-close, 30 kg/26 kg, H45, 400 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N5JOIuulSB6yBctpRsO/FINAL/Vm2vAKlwb40OnYLyu6EeZA",
+        "code": "F002915",
+        "description": "Full extension ball bearing slide for installation on wooden drawer. Inner drawer bar can be removed for easier installation of the drawer. The slide has a soft-closing device.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "400 mm",
+            "Loading Capacity": "30 kg",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Catalogue Page": "1.47",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Ball Bearing Slides": "/en/catalogue/ball-bearing-slides-fw0104/",
+            "Full Extension": "/en/catalogue/full-extension-fw010402/",
+            "Riex NB48 Ball bearing slide, full extension, soft-close, 30 kg/30 kg, H45, 450 mm, nickel": "/en/product/riex-nb48-ball-bearing-slide-full-extension-soft-close-30-kg-30-kg-h45-450-mm-nickel-fwf002916/"
+        },
+        "title": "Riex NB48 Ball bearing slide, full extension, soft-close, 30 kg/30 kg, H45, 450 mm, nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N59S6jTu3usfXhf0csS/FINAL/qLbuUmwgdOMRhnC4yE3Maw",
+        "code": "F002916",
+        "description": "Full extension ball bearing slide for installation on wooden drawer. Inner drawer bar can be removed for easier installation of the drawer. The slide has a soft-closing device.",
+        "parameters": {
+            "Brand": "Riex",
+            "Length": "450 mm",
+            "Loading Capacity": "30 kg",
+            "Mechanism": "Soft-close",
+            "Height": "45 mm",
+            "Slides Thickness": "1,0*1,0*1,2 mm",
+            "Catalogue Page": "1.47",
+            "Quantity in Box": "15"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Cup Hinges Clip-On": "/en/catalogue/cup-hinges-clip-on-fw0201/",
+            "Angular": "/en/catalogue/angular-fw020103/",
+            "Riex NC70 Hinge clip on, 45\u00b0, soft-close": "/en/product/riex-nc70-hinge-clip-on-45-soft-close-fwf000036/"
+        },
+        "title": "Riex NC70 Hinge clip on, 45\u00b0, soft-close",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N04jenaX42bLgelzvHo/FINAL/9QQ7q0hUgbFdyRYrukBNmg",
+        "code": "F000036",
+        "description": "Furniture cup angle hinge 45\u00b0 with soft-closing.  The hinge is equipped with a lever shaped casted clip mechanism for easy detachment from the plate. The hinge arm is equipped with a round sunk CAM screw with a large adjusting range for easy adjustment of the gap between the cabinet and the door. The hinge is equipped with a steel damper that is capable of absorbing even a very dynamically closing door. The door has a 45\u00b0 angle to the normal hinge when closed, so it is suitable for various types of corner cabinets.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "2.11",
+            "Fixing Type": "Screws on",
+            "Door Position": "Full Overlay",
+            "Set with Mounting Plate": "No",
+            "Soft-Close": "Yes",
+            "Push for Open": "No",
+            "Quantity in Box": "200"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Cup Hinges Clip-On": "/en/catalogue/cup-hinges-clip-on-fw0201/",
+            "Angular": "/en/catalogue/angular-fw020103/",
+            "Riex NC70 Hinge clip on, 90\u00b0, soft-close": "/en/product/riex-nc70-hinge-clip-on-90-soft-close-fwf000038/"
+        },
+        "title": "Riex NC70 Hinge clip on, 90\u00b0, soft-close",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N-avRvJ44JO-0SDGvno/FINAL/Py8tpxjxIRmWgCOoqf3y5w",
+        "code": "F000038",
+        "description": "Furniture cup angle hinge 90\u00b0 with soft-closing.  The hinge is equipped with a lever shaped casted clip mechanism for easy detachment from the plate. The hinge arm is equipped with a round sunk CAM screw with a large adjusting range for easy adjustment of the gap between the cabinet and the door. The hinge is equipped with a steel damper that is capable of absorbing even a very dynamically closing door. The door has a 90\u00b0 angle to the normal hinge when closed (the door is parallel to the cabinet), so it is suitable for various types of cabinets with frame.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "2.11",
+            "Fixing Type": "Screws on",
+            "Door Position": "Full Overlay",
+            "Set with Mounting Plate": "No",
+            "Soft-Close": "Yes",
+            "Push for Open": "No",
+            "Quantity in Box": "200"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Cup Hinges Clip-On": "/en/catalogue/cup-hinges-clip-on-fw0201/",
+            "Angular": "/en/catalogue/angular-fw020103/",
+            "Riex NC70 Hinge clip on, 135\u00b0, without soft-close": "/en/product/riex-nc70-hinge-clip-on-135-without-soft-close-fwf000040/"
+        },
+        "title": "Riex NC70 Hinge clip on, 135\u00b0, without soft-close",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N1bGBYlVk3x3lvbCJ3a/FINAL/H_vOU-IPoX7hodjrvJahqw",
+        "code": "F000040",
+        "description": "Furniture angle hinge 135\u00b0 without soft-closing. The hinge is equipped with a clip mechanism for easy attachment to the mounting pad. The door is at a 135\u00b0 angle to the normal hinge when closed, making the hinge particularly suitable for folded, corner cabinet doors.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "2.11",
+            "Fixing Type": "Screws on",
+            "Door Position": "Full Overlay",
+            "Set with Mounting Plate": "No",
+            "Soft-Close": "No",
+            "Push for Open": "No",
+            "Quantity in Box": "100"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 250 mm, white": "/en/product/riex-nr09-roller-slide-250-mm-white-fwf000545/"
+        },
+        "title": "Riex NR09 Roller slide, 250 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NM9IVW5l1Sp4ppH_8Rg/FINAL/kZgODSK0CNDsLQb28y7hzg",
+        "code": "F000545",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "250 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 300 mm, white": "/en/product/riex-nr09-roller-slide-300-mm-white-fwf000546/"
+        },
+        "title": "Riex NR09 Roller slide, 300 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NM9AO1YnRCvYzC8UFkC/FINAL/oMXSTiPA9AszIeaWWXNjNw",
+        "code": "F000546",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "300 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 350 mm, white": "/en/product/riex-nr09-roller-slide-350-mm-white-fwf000547/"
+        },
+        "title": "Riex NR09 Roller slide, 350 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NM7wHyvDWa38TipLvK0/FINAL/1P7g1q9wes-__CWd1TK8ng",
+        "code": "F000547",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "350 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 400 mm, white": "/en/product/riex-nr09-roller-slide-400-mm-white-fwf000548/"
+        },
+        "title": "Riex NR09 Roller slide, 400 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NM3je5oLQlT4E3mihdw/FINAL/sVbMrY_6Byja7RJojkvw-g",
+        "code": "F000548",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "400 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 450 mm, white": "/en/product/riex-nr09-roller-slide-450-mm-white-fwf000549/"
+        },
+        "title": "Riex NR09 Roller slide, 450 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mz-VO0xLJemDao57qHP/FINAL/XSHWADtgz-4EDZuu90bKSw",
+        "code": "F000549",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "450 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 500 mm, white": "/en/product/riex-nr09-roller-slide-500-mm-white-fwf000550/"
+        },
+        "title": "Riex NR09 Roller slide, 500 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NM850lGrD5n-ctFNTrE/FINAL/jt7GShVx6aRjrGXYY2J9_Q",
+        "code": "F000550",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "500 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Drawer Slides": "/en/catalogue/drawer-slides-fw01/",
+            "Roller Slides": "/en/catalogue/roller-slides-fw0106/",
+            "Slides": "/en/catalogue/slides-fw010601/",
+            "Riex NR09 Roller slide, 600 mm, white": "/en/product/riex-nr09-roller-slide-600-mm-white-fwf000552/"
+        },
+        "title": "Riex NR09 Roller slide, 600 mm, white",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLzFKnyZ-oj4CDXq45u/FINAL/KQbnyfPt9oUsjCR6U88sUA",
+        "code": "F000552",
+        "description": "Roller slides for all-wood drawers. A very simple but functional solution for pulling out wooden drawers. Total load capacity up to 25kg including the drawer. The slides have slopped end parts so that they close by themselves.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "White",
+            "Length": "600 mm",
+            "Loading Capacity": "20 kg",
+            "Mechanism": "Without Mechanism",
+            "Slides Thickness": "0,9 mm",
+            "Catalogue Page": "1.61",
+            "Quantity in Box": "25"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Cup Hinges Clip-On": "/en/catalogue/cup-hinges-clip-on-fw0201/",
+            "Standard": "/en/catalogue/standard-fw020101/",
+            "Riex NC50 Hinge clip on, full overlay, soft-close": "/en/product/riex-nc50-hinge-clip-on-full-overlay-soft-close-fwf000014/"
+        },
+        "title": "Riex NC50 Hinge clip on, full overlay, soft-close",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N04VcW5ELKE8DHIrhJX/FINAL/eRfs-4EDLQ5u5AZdhYNyfA",
+        "code": "F000014",
+        "description": "Furniture cup hinge with Euro screws in the cup, for full overlay doors. It is a hinge with very high durability. The hinge is equipped with a button shaped casted clip mechanism for easy detachment from mounting plate. Hinge arm is equipped with a CAM screw for easy adjustment of the gap between the cabinet and the door. The hinge is equipped with a steel damper that is able to absorb even a very dynamically closing door.",
+        "parameters": {
+            "Brand": "Riex",
+            "Fixing Type": "Screws on",
+            "Door Position": "Full Overlay",
+            "Set with Mounting Plate": "No",
+            "Soft-Close": "Yes",
+            "Push for Open": "No",
+            "Catalogue Page": "2.13",
+            "Quantity in Box": "200"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Push for Open Mechanisms": "/en/catalogue/push-for-open-mechanisms-fw0204/",
+            "Mechanisms": "/en/catalogue/mechanisms-fw020401/",
+            "Riex NK50 Push for open for drilling 10 mm, 38 mm with buffer, light grey": "/en/product/riex-nk50-push-for-open-for-drilling-10-mm-38-mm-with-buffer-light-grey-fwf003031/"
+        },
+        "title": "Riex NK50 Push for open for drilling 10 mm, 38 mm with buffer, light grey",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MfXefPAyzQq7sDE-Yog/FINAL/EaD9HP8jBOJQFqmnDGU_zg",
+        "code": "F003031",
+        "description": "Piston for handleless door opening. For installation into the edge of the body, a hole \u230010mm and 70mm long must be drilled and the piston pressed into the hole. There is a rubber door stop at the tip",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Light Grey",
+            "Catalogue Page": "2.41",
+            "Installation to Cabinet": "Concealed",
+            "Length of Ejection": "38",
+            "Magnet": "No",
+            "Quantity in Box": "50"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Hinges & Push for Open Mechanisms": "/en/catalogue/hinges-push-for-open-mechanisms-fw02/",
+            "Push for Open Mechanisms": "/en/catalogue/push-for-open-mechanisms-fw0204/",
+            "Accessories": "/en/catalogue/accessories-fw020402/",
+            "Riex NK50/NK55 Push for open adapter for external installation, light grey": "/en/product/riex-nk50-nk55-push-for-open-adapter-for-external-installation-light-grey-fwf003035/"
+        },
+        "title": "Riex NK50/NK55 Push for open adapter for external installation, light grey",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NdoUaQROrniO-dfNNKn/FINAL/daUfOSJHoFbzP3somcxbfw",
+        "code": "F003035",
+        "description": "Adapter for the piston of the handleless door opener for installation inside the cabinet without drilling into the edge.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "2.42",
+            "Quantity in Box": "200"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 320 mm, matt black": "/en/product/riextouch-xh01-handle-320-mm-matt-black-fwf001655/"
+        },
+        "title": "RiexTouch XH01 Handle, 320 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NF7ztXJiFq_gmw4LGWL/FINAL/yAw1qRiITpjvMsim2NKI_w",
+        "code": "F001655",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.29",
+            "CC Distance": "320 mm",
+            "Material": "Steel",
+            "Quantity in Box": "10"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 96 mm, stainless steel": "/en/product/riextouch-xh01-handle-96-mm-stainless-steel-fwf001664/"
+        },
+        "title": "RiexTouch XH01 Handle, 96 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJdlqpu3gOxgA_INp36/FINAL/3FMt-m1EA_B4rsRWsoUwcg",
+        "code": "F001664",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "96 mm",
+            "Material": "Stainless Steel"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 160 mm, stainless steel": "/en/product/riextouch-xh01-handle-160-mm-stainless-steel-fwf001666/"
+        },
+        "title": "RiexTouch XH01 Handle, 160 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJdl-fXaF95lLoOA-01/FINAL/JoZD_-VJb4NiwWbBiWdAFw",
+        "code": "F001666",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "160 mm",
+            "Material": "Stainless Steel"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 320 mm, stainless steel": "/en/product/riextouch-xh01-handle-320-mm-stainless-steel-fwf001671/"
+        },
+        "title": "RiexTouch XH01 Handle, 320 mm, stainless steel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJdhEhXiiPpVuXgrWPP/FINAL/ZvRSVlV7bedmpwzq89z4uw",
+        "code": "F001671",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Stainless Steel",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "320 mm",
+            "Material": "Stainless Steel"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 160 mm, polished chrome": "/en/product/riextouch-xh02-handle-160-mm-polished-chrome-fwf001234/"
+        },
+        "title": "RiexTouch XH02 Handle, 160 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLv2afnRdKUNEm7iy3N/FINAL/24RdBYrss21vMDLh1r42Yw",
+        "code": "F001234",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Polished",
+            "CC Distance": "160 mm",
+            "Quantity in Box": "50",
+            "Collection": "Horizon Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 128 mm, matt black": "/en/product/riextouch-xh02-handle-128-mm-matt-black-fwf001245/"
+        },
+        "title": "RiexTouch XH02 Handle, 128 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mi6Mq9fNn4OP3erCeRi/FINAL/j97H-K8WmqpmdXuFxCyNKw",
+        "code": "F001245",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.39",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 256 mm, matt black": "/en/product/riextouch-xh02-handle-256-mm-matt-black-fwf001248/"
+        },
+        "title": "RiexTouch XH02 Handle, 256 mm, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLtwJVNqej0GW0aZsty/FINAL/v_ZbqB3MXURuptxnvPI1Ag",
+        "code": "F001248",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Catalogue Page": "4.39",
+            "CC Distance": "256 mm",
+            "Quantity in Box": "25",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 160 mm, polished chrome": "/en/product/riextouch-xh01-handle-160-mm-polished-chrome-fwf001618/"
+        },
+        "title": "RiexTouch XH01 Handle, 160 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJiRuvt-Tl0ivtHee6Y/FINAL/z2oNM6BhilOkqsqi8sOBBw",
+        "code": "F001618",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Polished",
+            "CC Distance": "160 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 192 mm, polished chrome": "/en/product/riextouch-xh01-handle-192-mm-polished-chrome-fwf001619/"
+        },
+        "title": "RiexTouch XH01 Handle, 192 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N8waVHHNsPxpkKOeslr/FINAL/GQtQImPV6aPPzJQycyJ_5w",
+        "code": "F001619",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Polished",
+            "CC Distance": "192 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH01 Handle, 224 mm, polished chrome": "/en/product/riextouch-xh01-handle-224-mm-polished-chrome-fwf001620/"
+        },
+        "title": "RiexTouch XH01 Handle, 224 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NJehy-PzfvIEnlZF6WZ/FINAL/uml-b3JQxgoMFmyBYWxKxQ",
+        "code": "F001620",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.29",
+            "Surface Finishing": "Polished",
+            "CC Distance": "224 mm",
+            "Material": "Steel",
+            "Quantity in Box": "20"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 128 mm, brushed nickel": "/en/product/riextouch-xh02-handle-128-mm-brushed-nickel-fwf001227/"
+        },
+        "title": "RiexTouch XH02 Handle, 128 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mi1IZywEHyCs1BoCKDO/FINAL/5VStyKQ8BNQHw8I3K7GCtg",
+        "code": "F001227",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 160 mm, brushed nickel": "/en/product/riextouch-xh02-handle-160-mm-brushed-nickel-fwf001228/"
+        },
+        "title": "RiexTouch XH02 Handle, 160 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLuliuz8MT0PRA3ZQ2w/FINAL/ZdW-aVB5er51w38Y5Ir4eg",
+        "code": "F001228",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "160 mm",
+            "Quantity in Box": "50",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 256 mm, brushed nickel": "/en/product/riextouch-xh02-handle-256-mm-brushed-nickel-fwf001230/"
+        },
+        "title": "RiexTouch XH02 Handle, 256 mm, brushed nickel",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NLuhkji3b9Nac6K9W1G/FINAL/SawRi58QKG_TY5IOZfMhHg",
+        "code": "F001230",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Brushed",
+            "CC Distance": "256 mm",
+            "Quantity in Box": "25",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Handles, Knobs, Profiles and Hooks": "/en/catalogue/handles-knobs-profiles-and-hooks-fw04/",
+            "Handles and Knobs": "/en/catalogue/handles-and-knobs-fw0401/",
+            "Standard": "/en/catalogue/standard-fw040101/",
+            "RiexTouch XH02 Handle, 128 mm, polished chrome": "/en/product/riextouch-xh02-handle-128-mm-polished-chrome-fwf001233/"
+        },
+        "title": "RiexTouch XH02 Handle, 128 mm, polished chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-NqkVbQyhL6AUizC4BUc/FINAL/GP66sa_DKNZNiG-iYwRd-A",
+        "code": "F001233",
+        "description": "Metal handle with screws for screwing to the front of the cabinet.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Catalogue Page": "4.39",
+            "Surface Finishing": "Polished",
+            "CC Distance": "128 mm",
+            "Quantity in Box": "50",
+            "Collection": "Horizon Line",
+            "Material": "Zamac"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Adjustable Legs and Glides": "/en/catalogue/adjustable-legs-and-glides-fw0502/",
+            "Adjustable Kitchen Legs": "/en/catalogue/adjustable-kitchen-legs-fw050201/",
+            "Riex GK40 Kitchen adjustable leg, 3 parts, 100 mm (-5/+15)": "/en/product/riex-gk40-kitchen-adjustable-leg-3-parts-100-mm-5-15-fwf002794/"
+        },
+        "title": "Riex GK40 Kitchen adjustable leg, 3 parts, 100 mm (-5/+15)",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MkbMT1t1a1lAUFsZKly/FINAL/psOdV9_X-gy1BKlyjgafXQ",
+        "code": "F002794",
+        "description": "3-part kitchen plastic leg with adjustable length. The leg includes a solid flange for screwing under the cabinet body, which provides very high lateral stability of the leg.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "5.6",
+            "Height": "100 mm",
+            "Quantity in Box": "300",
+            "Loading Capacity": "250 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Adjustable Legs and Glides": "/en/catalogue/adjustable-legs-and-glides-fw0502/",
+            "Adjustable Kitchen Legs": "/en/catalogue/adjustable-kitchen-legs-fw050201/",
+            "Riex GK40 Kitchen adjustable leg, 3 parts, 150 mm (-5/+15)": "/en/product/riex-gk40-kitchen-adjustable-leg-3-parts-150-mm-5-15-fwf002796/"
+        },
+        "title": "Riex GK40 Kitchen adjustable leg, 3 parts, 150 mm (-5/+15)",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MkbHUhsFZonSXjLM_V8/FINAL/2dDDxFIpvBU-Bj9QzuXVzQ",
+        "code": "F002796",
+        "description": "3-part kitchen plastic leg with adjustable length. The leg includes a solid flange for screwing under the cabinet body, which provides very high lateral stability of the leg.",
+        "parameters": {
+            "Brand": "Riex",
+            "Catalogue Page": "5.6",
+            "Height": "150 mm",
+            "Quantity in Box": "200",
+            "Loading Capacity": "250 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Castors": "/en/catalogue/castors-fw0503/",
+            "Visible": "/en/catalogue/visible-fw050301/",
+            "Riex GC10 Furniture castor D50, plate 42x42x2 mm, brake, black": "/en/product/riex-gc10-furniture-castor-d50-plate-42x42x2-mm-brake-black-fwf000843/"
+        },
+        "title": "Riex GC10 Furniture castor D50, plate 42x42x2 mm, brake, black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-N0FMPq_lu26gSFdBMJl/FINAL/jOyX6OxUbKnPAobm-V59Ww",
+        "code": "F000843",
+        "description": "Furniture castor with mounting plate for lockers running on soft surfaces (without soft tread). The castor is equipped with a brake to lock and secure the furniture against sliding.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Black",
+            "Catalogue Page": "5.38",
+            "Diameter": "50 mm",
+            "Type of Tread": "Hard",
+            "Quantity in Box": "200",
+            "Static Loading Capacity": "40 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Furniture Legs Visible": "/en/catalogue/furniture-legs-visible-fw0501/",
+            "Aluminium": "/en/catalogue/aluminium-fw050102/",
+            "Riex GA77 Furniture leg D22, H150, brushed gold": "/en/product/riex-ga77-furniture-leg-d22-h150-brushed-gold-fwf003057/"
+        },
+        "title": "Riex GA77 Furniture leg D22, H150, brushed gold",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mv3BpvHz_IhEdtZSX9p/FINAL/w13Oda8a_SVfV5b7NjefYA",
+        "code": "F003057",
+        "description": "Design aluminium furniture leg.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Nickel",
+            "Surface Finishing": "Brushed",
+            "Height": "150 mm",
+            "Rectification": "Yes",
+            "Height Adjustment": "Yes , \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tNo",
+            "Catalogue Page": "5.23",
+            "Quantity in Box": "10",
+            "Loading Capacity": "400 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Furniture Legs Visible": "/en/catalogue/furniture-legs-visible-fw0501/",
+            "Metal": "/en/catalogue/metal-fw050101/",
+            "Riex GS25 Furniture leg H50, chrome": "/en/product/riex-gs25-furniture-leg-h50-chrome-fwf001939/"
+        },
+        "title": "Riex GS25 Furniture leg H50, chrome",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MvPkN9B_GgcusInhkzt/FINAL/KvwJH_ToJ1WoLQNNHne-jA",
+        "code": "F001939",
+        "description": "Steel round furniture leg.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Chrome",
+            "Surface Finishing": "Polished",
+            "Rectification": "No",
+            "Height Adjustment": "Yes",
+            "Catalogue Page": "5.20",
+            "Height": "50 mm",
+            "Quantity in Box": "250",
+            "Loading Capacity": "150 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Furniture Legs, Castors, Glides": "/en/catalogue/furniture-legs-castors-glides-fw05/",
+            "Furniture Legs Visible": "/en/catalogue/furniture-legs-visible-fw0501/",
+            "Metal": "/en/catalogue/metal-fw050101/",
+            "Riex GS25 Furniture leg H50, matt black": "/en/product/riex-gs25-furniture-leg-h50-matt-black-fwf001941/"
+        },
+        "title": "Riex GS25 Furniture leg H50, matt black",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mhm9o3KpkVUnI5ZDu4M/FINAL/x6iu6t1uES7nqpTiXJC2KQ",
+        "code": "F001941",
+        "description": "Steel round furniture leg.",
+        "parameters": {
+            "Brand": "Riex",
+            "Surface Finishing": "Matt",
+            "Colour": "Black",
+            "Rectification": "Yes",
+            "Height Adjustment": "No",
+            "Catalogue Page": "5.20",
+            "Height": "50 mm",
+            "Quantity in Box": "250",
+            "Loading Capacity": "150 kg"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Wardrobe Fittings": "/en/catalogue/wardrobe-fittings-fw11/",
+            "Hangers": "/en/catalogue/hangers-fw1103/",
+            "Tie Hangers": "/en/catalogue/tie-hangers-fw110303/",
+            "Riex VH31 Pull-out tie/belt rack, 29 plastic hooks, light grey": "/en/product/riex-vh31-pull-out-tie-belt-rack-29-plastic-hooks-light-grey-fwf001798/"
+        },
+        "title": "Riex VH31 Pull-out tie/belt rack, 29 plastic hooks, light grey",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mz-LmC3HqtDqkB45_6a/FINAL/3IRsyp5yqBl8KB-n5c7lTg",
+        "code": "F001798",
+        "description": "Pull-out tie hanger with side mounting. Plastic hooks that slide out on ball-bearing slides",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Light Grey",
+            "Catalogue Page": "11.12"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Connection Fittings": "/en/catalogue/connection-fittings-fw14/",
+            "Connecting Plates, Angles": "/en/catalogue/connecting-plates-angles-fw1409/",
+            "Angles": "/en/catalogue/angles-fw140902/",
+            "Riex JC41 Angled bracket, 50x50x15 mm, T2, white zinc": "/en/product/riex-jc41-angled-bracket-50x50x15-mm-t2-white-zinc-fwf003105/"
+        },
+        "title": "Riex JC41 Angled bracket, 50x50x15 mm, T2, white zinc",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MuCD0q59XqLXBLUvzoH/FINAL/caH2ElE2REJa86mqFt3kNg",
+        "code": "F003105",
+        "description": "Metal angle to connect two plates at right angles. Reinforced steel plate with screw holes.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Zinc White",
+            "Catalogue Page": "14.62",
+            "Quantity in Box": "100"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Connection Fittings": "/en/catalogue/connection-fittings-fw14/",
+            "Connecting Plates, Angles": "/en/catalogue/connecting-plates-angles-fw1409/",
+            "Angles": "/en/catalogue/angles-fw140902/",
+            "Riex JC47 Angled bracket wide, 40x40x30 mm, T2, white zinc": "/en/product/riex-jc47-angled-bracket-wide-40x40x30-mm-t2-white-zinc-fwf003118/"
+        },
+        "title": "Riex JC47 Angled bracket wide, 40x40x30 mm, T2, white zinc",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-MltNwLjr_Qaaw-4S-go/FINAL/tdHbEEsBat9IgdZA1hBcVA",
+        "code": "F003118",
+        "description": "Metal angle to connect two plates at right angles. Reinforced steel plate with screw holes.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Zinc White",
+            "Catalogue Page": "14.63",
+            "Quantity in Box": "50"
+        }
+    },
+    {
+        "breadcrumbs": {
+            "Home": "/en/",
+            "Furniture Fittings": "/en/furniture-fittings/",
+            "Connection Fittings": "/en/catalogue/connection-fittings-fw14/",
+            "Connecting Plates, Angles": "/en/catalogue/connecting-plates-angles-fw1409/",
+            "Angles": "/en/catalogue/angles-fw140902/",
+            "Riex JC52 Angled bracket, 17x17x15 mm, T1,5, white zinc": "/en/product/riex-jc52-angled-bracket-17x17x15-mm-t1-5-white-zinc-fwf004315/"
+        },
+        "title": "Riex JC52 Angled bracket, 17x17x15 mm, T1,5, white zinc",
+        "imageUrl": "https://hosting.photorobot.com/images/4748478675156992/-Mti9P-UXFsN_0QWhmj6/FINAL/qrXecSLD6KzXpZ0qBZvLIA",
+        "code": "F004315",
+        "description": "A small metal angle bracket used for connecting or reinforcing the T-joints of boards. It can also be used to reinforce the bottom of a drawer by connecting it to the front panel.",
+        "parameters": {
+            "Brand": "Riex",
+            "Colour": "Zinc White",
+            "Catalogue Page": "14.65",
+            "Quantity in Box": "100"
+        }
+    }
+]
+
+
+# Function to flatten the nested JSON structure
+def flatten_json(data):
+    flat_data = {}
+    for key, value in data.items():
+        if isinstance(value, dict):
+            # Recursively flatten nested dictionaries
+            for sub_key, sub_value in flatten_json(value).items():
+                flat_data[f"{key}_{sub_key}"] = sub_value
+        else:
+            flat_data[key] = value
+    return flat_data
+
+# Open a CSV file to write the data
+with open('output_dynamic.csv', mode='w', newline='', encoding='utf-8') as file:
+    # Initialize the CSV writer with dynamic fieldnames based on the JSON data
+    header = set()  # Set to store unique headers
+    for item in data:
+        flat_item = flatten_json(item)
+        header.update(flat_item.keys())
+
+    header = list(header)  # Convert to list to pass to DictWriter
+
+    writer = csv.DictWriter(file, fieldnames=header)
+    writer.writeheader()
+
+    # Write the data to the CSV
+    for item in data:
+        flat_item = flatten_json(item)
+        writer.writerow(flat_item)
+
+print("CSV file 'output_dynamic.csv' has been created successfully.")
