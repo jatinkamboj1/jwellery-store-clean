@@ -26,8 +26,9 @@ import { convertS3UrlToLocalPath } from "@/utils/util";
 
 export default function MyAccount() {
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const token = session?.user?.token;
+ const { data: session, status } = useSession();
+const token = session?.user?.token;
+const role = session?.user?.role;
   const [userData, setUserData] = useState({
     email: null,
     id: null,
@@ -138,9 +139,14 @@ const SideBar = ({ setPanel, role }) => {
       >
         <i className="fa fa-map-marker"></i> address
       </button>
-      <a className="myaccount-tab-menu-link" href="/wishlist">
+      {/* <a className="myaccount-tab-menu-link" href="/wishlist">
         <i className="fa fa-heart"></i> Wishlist
-      </a>
+      </a> */}
+      {role !== "ADMIN" && (
+  <a className="myaccount-tab-menu-link" href="/wishlist">
+    <i className="fa fa-heart"></i> Wishlist
+  </a>
+)}
       {/* <button
         className="myaccount-tab-menu-link"
         onClick={() => handleLogout()}

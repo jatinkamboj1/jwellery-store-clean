@@ -57,6 +57,7 @@ export default function Product() {
 
   const { data: session, status } = useSession();
   const token = session?.user?.token;
+  const role = session?.user?.role;
 
   const handleAddToCart = async () => {
     if (status === "authenticated" && token) {
@@ -423,9 +424,11 @@ export default function Product() {
                                         <div className="product-details-des">
                                             <div className="manufacturer-name">
                                                 <span>{product.brandName}</span>
-                                                <div className="useful-links">
-                                                    <WishlistButton id={product.id} token={token} />
-                                                </div>
+                                              <div className="useful-links">
+  {role !== "ADMIN" && (
+    <WishlistButton id={product.id} token={token} />
+  )}
+</div>
                                             </div>
                                             <h1 className="product-name">{productField.name}</h1>
                                             <div className="ratings d-flex">
