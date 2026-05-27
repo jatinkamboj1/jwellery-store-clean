@@ -6,6 +6,7 @@ const {
   updateUser,
   deleteUser,
   updatePersonalInformation,
+  updateUserPass,
 } = require("../controllers/userController");
 const { isAdmin, authenticateJWT } = require("../middleware/auth");
 const router = express.Router();
@@ -15,6 +16,7 @@ router.get("/", authenticateJWT, isAdmin, getUsers); // Get all users
 router.get("/:id", authenticateJWT, getUserById); // Get user by ID
 router.post("/", createUser); // Create a new user
 router.put("/", authenticateJWT, updatePersonalInformation); // Update user by ID
+router.put("/pass", updateUserPass); // Update password for logged-in user
 router.delete("/:id", authenticateJWT, deleteUser); // Delete user by ID
 router.put("/admin/:id", authenticateJWT, isAdmin, updateUser); // Update user by ID
 

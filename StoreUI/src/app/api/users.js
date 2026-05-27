@@ -319,6 +319,31 @@ export const getUserById = async (token, id = "user") => {
   }
 };
 
+export const forgotPassword = async (email, password) => {
+  try {
+    const response = await fetch(`${process.env.SERVER_URL}/user/pass`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      toast.error(data?.message || "Failed to update password");
+      return null;
+    }
+
+    toast.success(data?.message || "Password updated successfully");
+    return data;
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    toast.error("Failed to update password");
+    return null;
+  }
+};
+
 export const updateUser = async (token, userdata) => {
   try {
     const response = await axios.put(
