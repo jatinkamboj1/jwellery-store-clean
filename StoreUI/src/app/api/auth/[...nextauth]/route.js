@@ -23,10 +23,10 @@ export const authOptions = {
           // Check if the response is successful and contains the necessary user data
           if (res.ok && user && user.token) {
             return {
-              id: user.id,
-              email: user.email,
-              name: user.name,
-              role: user.role,
+              id: user.user.id,
+              email: user.user.email,
+              name: user.user.name,
+              role: user.user.role,
               token: user.token,
             };
           } else {

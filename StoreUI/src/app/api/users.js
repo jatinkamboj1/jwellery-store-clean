@@ -34,11 +34,11 @@ export const authOptions = {
           }
 
           // Ensure required fields exist
-          if (user?.id && user?.token) {
+          if (user?.user?.id && user?.token) {
             return {
-              id: user.id,
-              email: user.email,
-              role: user.role,
+              id: user.user.id,
+              email: user.user.email,
+              role: user.user.role,
               token: user.token,
             };
           }

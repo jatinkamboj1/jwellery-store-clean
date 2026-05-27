@@ -9,6 +9,11 @@ import "./global.css";
 export default async function Layout({children}) {
   const session = await getServerSession(authOptions);
   
+  console.log("🔒 [Debug] Admin Layout Access Attempt:", {
+    email: session?.user?.email,
+    role: session?.user?.role,
+  });
+
   if (!session) {
     redirect("/signin");
   }

@@ -29,6 +29,18 @@ const Header = () => {
     });
     const { data: session, status } = useSession();
   
+    useEffect(() => {
+        if (session?.user) {
+            console.log("🔑 [Debug] Current User Session:", {
+                email: session?.user?.email,
+                role: session?.user?.role,
+                id: session?.user?.id
+            });
+        } else {
+            console.log("🔑 [Debug] No active user session.");
+        }
+    }, [session]);
+
     const token = session?.user?.token;
 
     const headerdata = async () => {
