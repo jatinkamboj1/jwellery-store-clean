@@ -194,10 +194,18 @@ const updateAddress = async (req, res) => {
 
 const updateAddressbyToken = async (req, res) => {
   const { id } = req.params;
+  const userId = req.user.id;
+
   try {
     const address = await prisma.addresses.findUnique({ where: { id } });
     if (!address) return res.status(404).json({ message: "No address found" });
+
+    if (address.userId !== userId) {
+      return res.status(403).json({ message: "Unauthorized to update this address" });
+    }
+
     const {
+      name,
       street,
       city,
       stateOrProvince,
@@ -206,18 +214,21 @@ const updateAddressbyToken = async (req, res) => {
       addressType,
       isDefault,
     } = req.body;
+
     const updatedAddress = await prisma.addresses.update({
       where: { id },
       data: {
+        name: name || address.name,
         street: street || address.street,
         city: city || address.city,
         stateOrProvince: stateOrProvince || address.stateOrProvince,
         country: country || address.country,
         zip: zip || address.zip,
         addressType: addressType || address.addressType,
-        isDefault: isDefault,
+        isDefault: typeof isDefault === "boolean" ? isDefault : address.isDefault,
       },
     });
+
     return res.status(200).json({
       message: "Successfully updated address",
       updatedAddress,
