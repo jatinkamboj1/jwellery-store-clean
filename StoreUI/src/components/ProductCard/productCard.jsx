@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import Image from "next/image";
 import Script from "next/script";
 import Link from 'next/link';
@@ -12,10 +12,18 @@ import { convertS3UrlToLocalPath } from "@/utils/util";
 const ProductCard = ({ product }) => {
     const { data: session, status } = useSession();
     const token = session?.user?.token;
+    const role = session?.user?.role;
+    const isAdmin = String(role || "").toUpperCase() === "ADMIN";
 
     const { addToCart } = useCartStore();
-
+    useEffect(()=>{
+        console.log("isAdmin", isAdmin);
+    }, [isAdmin])
     const handleAddToCart = async () => {
+
+
+
+
         if (status === "authenticated" && token) {
             try {
                 let response;
@@ -55,9 +63,11 @@ const ProductCard = ({ product }) => {
                     </div>
                 ))}
             </div>)}
-            <div className="button-group">
-                <WishlistButton id={product.id} token={token} />
-            </div>
+            {!isAdmin && (
+                <div className="button-group">
+                    <WishlistButton id={product.id} token={token} />
+                </div>
+            )}
             <div className="cart-hover">
                 <button onClick={handleAddToCart} className="btn btn-cart">add to cart</button>
             </div>

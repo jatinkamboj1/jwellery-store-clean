@@ -12,6 +12,7 @@ const reviewRoutes = require("./reviews");
 const testimonialRoutes = require("./testimonials");
 const wishlistRoutes = require("./wishlist");
 const cartRoutes = require("./cart");
+const settingsRoutes = require("./settings");
 
 const express = require("express");
 const { authenticateJWT, isAdmin } = require("../middleware/auth");
@@ -31,5 +32,6 @@ router.use("/review", reviewRoutes);
 router.use("/testimonials", testimonialRoutes);
 router.use("/wishlist", wishlistRoutes);
 router.use("/cart", cartRoutes);
+router.use("/settings", settingsRoutes);
 
 module.exports = router;
