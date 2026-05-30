@@ -3,9 +3,22 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { IoMdCall } from "react-icons/io";
 import { FaFacebook, FaInstagram, FaPinterest } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { getSettings } from "../../app/api/settings";
 
 const SocialHeader = () => {
   const router = useRouter();
+  const [announcement, setAnnouncement] = useState("Free Shipping Anywhere in India for orders above Rs 499");
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await getSettings();
+      if (data && data.announcement) {
+        setAnnouncement(data.announcement);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   return (
     <div className={`social-header-main-area sticky`}>
@@ -32,18 +45,22 @@ const SocialHeader = () => {
         </div>
         <div>
           <marquee direction="left" class="d-block d-sm-none text-sm text-dark">
-            Free Shipping Anywhere in India for orders above Rs 499
+            {announcement}
           </marquee>
 
           <span class="d-none d-sm-inline text-sm text-dark">
-            Free Shipping Anywhere in India for orders above Rs 499
+            {announcement}
           </span>
 
         </div>
-        <div class="d-none d-sm-block">
-          <Link href={"/contact-us"} className="d-flex align-items-center gap-2 text-dark text-sm md:text-base">
-            <IoMdCall size={20} /> <span className="d-none d-md-block">Contact Us</span>
-          </Link>
+        <div className="hidden sm:flex items-center gap-2 text-gray-700 text-sm whitespace-nowrap">
+          <span className="font-semibold">Contact Us:</span>
+          <a 
+            href="mailto:weddingtouchbysaadgi@gmail.com"
+            className="hover:text-blue-600 transition-colors"
+          >
+            weddingtouchbysaadgi@gmail.com
+          </a>
         </div>
       </div>
     </div>
