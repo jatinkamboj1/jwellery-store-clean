@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { forgotPassword } from "@/app/api/users";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function ForgotPassword() {
   const router = useRouter();
@@ -16,6 +17,10 @@ export default function ForgotPassword() {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,30 +93,80 @@ export default function ForgotPassword() {
                     <label htmlFor="forgot-password" className="mb-2">
                       New Password
                     </label>
-                    <input
-                      id="forgot-password"
-                      type="password"
-                      name="password"
-                      placeholder="Enter New Password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                    />
+                    <div style={{ position: "relative" }}>
+                      <input
+                        id="forgot-password"
+                        type={showPassword.password ? "text" : "password"}
+                        name="password"
+                        placeholder="Enter New Password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                      />
+                      <button
+                        type="button"
+                        aria-label={showPassword.password ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setShowPassword((prev) => ({
+                            ...prev,
+                            password: !prev.password,
+                          }))
+                        }
+                        style={{
+                          position: "absolute",
+                          right: "12px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          background: "transparent",
+                          border: "none",
+                          padding: 0,
+                          cursor: "pointer",
+                          lineHeight: 0,
+                        }}
+                      >
+                        {showPassword.password ? <FaEyeSlash /> : <FaEye />}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="single-input-item">
                     <label htmlFor="forgot-confirm-password" className="mb-2">
                       Confirm Password
                     </label>
-                    <input
-                      id="forgot-confirm-password"
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Confirm New Password"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      required
-                    />
+                    <div style={{ position: "relative" }}>
+                      <input
+                        id="forgot-confirm-password"
+                        type={showPassword.confirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        placeholder="Confirm New Password"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                      />
+                      <button
+                        type="button"
+                        aria-label={showPassword.confirmPassword ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setShowPassword((prev) => ({
+                            ...prev,
+                            confirmPassword: !prev.confirmPassword,
+                          }))
+                        }
+                        style={{
+                          position: "absolute",
+                          right: "12px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          background: "transparent",
+                          border: "none",
+                          padding: 0,
+                          cursor: "pointer",
+                          lineHeight: 0,
+                        }}
+                      >
+                        {showPassword.confirmPassword ? <FaEyeSlash /> : <FaEye />}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="single-input-item">

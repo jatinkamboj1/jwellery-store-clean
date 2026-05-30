@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "@/styles/myAccount.scss";
 import "@/styles/sliders.scss";
 import "@/styles/cartPage.scss";
@@ -172,6 +172,14 @@ const Orders = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(true); // State for popup visibility
   const [selectedOrder, setSelectedOrder] = useState(null); // State to store the selected order
   const [isOpen, setIsOpen] = useState(false);
+  const [dateSortDirection, setDateSortDirection] = useState("desc");
+  const [filters, setFilters] = useState({
+    status: "",
+    payment: "",
+    items: "",
+    amount: "",
+    date: "",
+  });
 
   const fetchUserOrders = async (token, currentPage) => {
     const response = await userOrders(token, currentPage, pageDetails.limit);
@@ -231,6 +239,65 @@ const Orders = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const toggleDateSort = () => {
+    setDateSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
+  };
+
+  const filteredAndSortedOrders = useMemo(() => {
+    const filtered = [...orders].filter((item) => {
+      const orderDate = new Date(item.createdAt).toISOString().slice(0, 10);
+      const orderStatus = String(item.status || "");
+      const payment = item.paid ? "Paid" : "Unpaid";
+      const itemsCount = item.products?.length || 1;
+      const amount = Number(item.actualAmount || 0);
+
+      const statusOk = filters.status
+        ? orderStatus.toLowerCase() === filters.status.toLowerCase()
+        : true;
+      const paymentOk = filters.payment ? payment === filters.payment : true;
+      const itemsOk = filters.items
+        ? itemsCount === Number(filters.items)
+        : true;
+      const amountOk = filters.amount ? amount === Number(filters.amount) : true;
+      const dateOk = filters.date ? orderDate === filters.date : true;
+
+      return statusOk && paymentOk && itemsOk && amountOk && dateOk;
+    });
+
+    filtered.sort((a, b) => {
+      const aDate = new Date(a.createdAt).getTime();
+      const bDate = new Date(b.createdAt).getTime();
+      return dateSortDirection === "asc" ? aDate - bDate : bDate - aDate;
+    });
+
+    return filtered;
+  }, [orders, filters, dateSortDirection]);
+
+  const statusOptions = useMemo(() => {
+    return [...new Set(orders.map((o) => o.status).filter(Boolean))];
+  }, [orders]);
+
+  const orderGridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+    alignItems: "center",
+    gap: "8px",
+  };
+
+  const filterControlStyle = {
+    width: "100%",
+    height: "38px",
+    border: "1px solid #d9dde3",
+    borderRadius: "8px",
+    padding: "8px 10px",
+    fontSize: "14px",
+    backgroundColor: "#fff",
+  };
+
   return (
     <div className="myaccount-content">
       <div className="d-flex  justify-content-between align-item-center">
@@ -240,49 +307,120 @@ const Orders = () => {
         <div className="table-responsive">
           <table className="sa-table text-nowrap w-100">
             <thead>
-              <tr
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(6, 16%)",
-                  alignItems: "center",
-                }}
-              >
-                <th>Date</th>
+              <tr style={orderGridStyle}>
+                <th style={{ cursor: "pointer" }} onClick={toggleDateSort}>
+                  Date {dateSortDirection === "asc" ? "▲" : "▼"}
+                </th>
                 <th>Status</th>
                 <th>Payment</th>
                 <th>Items</th>
                 <th>Amount</th>
                 <th>Actions</th>
               </tr>
+              <tr style={orderGridStyle}>
+                <th>
+                  <input
+                    type="date"
+                    style={filterControlStyle}
+                    value={filters.date}
+                    onChange={(e) => handleFilterChange("date", e.target.value)}
+                  />
+                </th>
+                <th>
+                  <select
+                    style={filterControlStyle}
+                    value={filters.status}
+                    onChange={(e) => handleFilterChange("status", e.target.value)}
+                  >
+                    <option value="">All</option>
+                    {statusOptions.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                </th>
+                <th>
+                  <select
+                    style={filterControlStyle}
+                    value={filters.payment}
+                    onChange={(e) => handleFilterChange("payment", e.target.value)}
+                  >
+                    <option value="">All</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                  </select>
+                </th>
+                <th>
+                  <input
+                    type="number"
+                    min="1"
+                    style={filterControlStyle}
+                    placeholder="Items"
+                    value={filters.items}
+                    onChange={(e) => handleFilterChange("items", e.target.value)}
+                  />
+                </th>
+                <th>
+                  <input
+                    type="number"
+                    min="0"
+                    style={filterControlStyle}
+                    placeholder="Amount"
+                    value={filters.amount}
+                    onChange={(e) => handleFilterChange("amount", e.target.value)}
+                  />
+                </th>
+                <th>
+                  <button
+                    type="button"
+                    className="btn btn-sm w-100"
+                    style={{ height: "38px", borderRadius: "8px" }}
+                    onClick={() =>
+                      setFilters({
+                        status: "",
+                        payment: "",
+                        items: "",
+                        amount: "",
+                        date: "",
+                      })
+                    }
+                  >
+                    Clear
+                  </button>
+                </th>
+              </tr>
             </thead>
             <tbody>
-              {orders.map((order, index) => (
-                <tr
-                  key={index}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(6, 16%)",
-                    alignItems: "center",
-                  }}
-                >
-                  <td>
-                    {new Date(order.createdAt).toLocaleDateString("en-GB")}
-                  </td>
-                  <td>{order.status}</td>
-                  <td>{order.paid ? "Paid" : "Unpaid"}</td>
-                  <td>{order.products.length || 1} items</td>
-                  <td>₹{order.actualAmount}</td>
-                  <td>
-                    <button
-                      className=" "
-                      onClick={() => togglePopup(order)}
-                      title="Order Details"
-                    >
-                      <FaEye size={15} />
-                    </button>
+              {filteredAndSortedOrders.length > 0 ? (
+                filteredAndSortedOrders.map((order, index) => (
+                  <tr key={index} style={orderGridStyle}>
+                    <td>
+                      {new Date(order.createdAt).toLocaleDateString("en-GB")}
+                    </td>
+                    <td>{order.status}</td>
+                    <td>{order.paid ? "Paid" : "Unpaid"}</td>
+                    <td>{order.products.length || 1} items</td>
+                    <td>₹{order.actualAmount}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm"
+                        style={{ borderRadius: "8px", minWidth: "42px" }}
+                        onClick={() => togglePopup(order)}
+                        title="Order Details"
+                      >
+                        <FaEye size={15} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} className="py-4 text-center text-muted">
+                    No orders found for selected filters.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -481,6 +619,7 @@ const Address = () => {
   const [reason, setReason] = useState("add");
 
   const [formData, setFormData] = useState({
+    name: "",
     street: "",
     city: "",
     stateOrProvince: "",
@@ -496,8 +635,20 @@ const Address = () => {
 
   const handleShowPopup = (e, action, data) => {
     e.preventDefault();
-    setFormData(data);
-    setReason("edit");
+    if (action === "edit") {
+      setFormData(data);
+      setReason("edit");
+    } else {
+      setReason("add");
+      setFormData({
+        street: "",
+        city: "",
+        stateOrProvince: "",
+        country: "",
+        zip: "",
+        name: "",
+      });
+    }
     setShowPopup(true);
   };
 
@@ -506,6 +657,7 @@ const Address = () => {
     setShowPopup(false);
     // setReason("add");
     setFormData({
+      name: "",
       street: "",
       city: "",
       stateOrProvince: "",
@@ -532,6 +684,7 @@ const Address = () => {
         setShowPopup(false);
         setReason("add");
         setFormData({
+          name: "",
           street: "",
           city: "",
           stateOrProvince: "",
@@ -549,12 +702,15 @@ const Address = () => {
     e.preventDefault();
     try {
       const response = await updateUserAddress(formData, token, formData.id);
+      if (!response) return;
+
       toast.success("Address Updated Successfully");
       fetchUserAddres(token);
 
       setShowPopup(false);
       setReason("add");
       setFormData({
+        name: "",
         street: "",
         city: "",
         stateOrProvince: "",
@@ -584,87 +740,130 @@ const Address = () => {
 
   return (
     <div className="myaccount-content">
-      {showPopup && (
-        <div className="address-popup">
-          <div className="address-popup-wrap">
-            <div className="d-flex flex-column gap-1 mb-2">
-              <div className="d-flex justify-content-between items-center">
-                <h4 className="inline text-lg font-semibold">Address Info</h4>
-                <button type="button" onClick={(e) => closeModal(e)}>
-                  <IoMdClose size={24} />
-                </button>
-              </div>
-              <span className="text-danger small">
-                * All fields are required
-              </span>
-            </div>
-            <hr />
-
-            {/* Form Body */}
-            <form
-              className="mt-0"
-              onSubmit={reason === "edit" ? updateAddress : handleSubmit}
-            >
-              <div className="address-form">
-                {[
-                  {
-                    label: "Name",
-                    name: "name",
-                    placeholder: "Name (For Quick Ref)",
-                  },
-                  {
-                    label: "Street",
-                    name: "street",
-                    placeholder: "Street Address",
-                  },
-                  { label: "City", name: "city", placeholder: "City" },
-                  {
-                    label: "State/Province",
-                    name: "stateOrProvince",
-                    placeholder: "State/Province",
-                  },
-                  { label: "Country", name: "country", placeholder: "Country" },
-                  { label: "ZIP Code", name: "zip", placeholder: "ZIP Code" },
-                ].map(({ label, name, placeholder }) => (
-                  <div key={name} className="address-form-field">
-                    <input
-                      type="text"
-                      id={name}
-                      name={name}
-                      value={formData[name]}
-                      onChange={handleAddressChange}
-                      placeholder={placeholder}
-                      required
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex justify-between mt-4">
-                <button
-                  type="submit"
-                  className="myaccount-tab-menu-link active w-100 text-center"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
       <div className="d-flex card_border justify-content-between align-item-center">
         <h4>Address</h4>
         {address?.length !== 5 && (
-          <button type="button" onClick={(e) => setShowPopup(true)}>
+          <button type="button" onClick={(e) => handleShowPopup(e, "add")}>
             <FaPlus />
           </button>
         )}
       </div>
+      {showPopup && (
+        <div className="account-details-form mt-3">
+          <div className="d-flex flex-column gap-1 mb-2">
+            <div className="d-flex justify-content-between items-center">
+              
+             
+            </div>
+           
+          </div>
+          <hr />
+
+          <form
+            action="#"
+            onSubmit={reason === "edit" ? updateAddress : handleSubmit}
+          >
+            <div className="single-input-item">
+              <label htmlFor="name" className="required">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleAddressChange}
+                placeholder="Name (For Quick Ref)"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <label htmlFor="street" className="required">
+                Street
+              </label>
+              <input
+                type="text"
+                id="street"
+                name="street"
+                value={formData.street}
+                onChange={handleAddressChange}
+                placeholder="Street Address"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <label htmlFor="city" className="required">
+                City
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleAddressChange}
+                placeholder="City"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <label htmlFor="stateOrProvince" className="required">
+                State/Province
+              </label>
+              <input
+                type="text"
+                id="stateOrProvince"
+                name="stateOrProvince"
+                value={formData.stateOrProvince}
+                onChange={handleAddressChange}
+                placeholder="State/Province"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <label htmlFor="country" className="required">
+                Country
+              </label>
+              <input
+                type="text"
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleAddressChange}
+                placeholder="Country"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <label htmlFor="zip" className="required">
+                ZIP Code
+              </label>
+              <input
+                type="text"
+                id="zip"
+                name="zip"
+                value={formData.zip}
+                onChange={handleAddressChange}
+                placeholder="ZIP Code"
+                required
+              />
+            </div>
+            <div className="single-input-item">
+              <button className="btn btn-sqr" type="submit">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       <div className="row">
         {address?.length !== 0 &&
-          address?.map((add, index) => (
+          address
+            ?.filter(
+              (add) =>
+                !(reason === "edit" && showPopup && formData?.id === add.id)
+            )
+            .map((add, index) => (
             <div key={`address-${index}`} className="col-12 col-md-6">
               <div className="my-address">
                 <div className="d-flex justify-content-between align-items-center">

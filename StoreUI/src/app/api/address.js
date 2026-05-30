@@ -127,8 +127,6 @@ export const fetchUserAddress = async (token) => {
   }
 };
 export const updateUserAddress = async (formdata, token, id) => {
-  //console.log("token in update ", id);
-
   try {
     const response = await axios.put(
       `${process.env.SERVER_URL}/address/user/${id}`,
@@ -139,8 +137,19 @@ export const updateUserAddress = async (formdata, token, id) => {
         },
       }
     );
+
+    if (response.status !== 200) {
+      throw new Error(response?.data?.message || "Failed to update address");
+    }
+
     return response.data;
   } catch (error) {
-    console.error("Error fetching address:", error);
+    console.error("Error updating address:", error);
+    toast.error(
+      error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Failed to update address"
+    );
+    return null;
   }
 };
