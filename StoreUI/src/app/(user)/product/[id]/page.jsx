@@ -712,8 +712,8 @@ export default function Product() {
                 <span>{product.name}</span>
               </h5>
 
-              {//console.log("reviews: ", reviews)}
-              {reviews?.map((review, index) => (
+              
+              {reviews.map((review, index) => (
                 <div
                   className="total-reviews d-flex align-items-start mb-4"
                   key={index}
