@@ -16,7 +16,7 @@
 
 .filter-btn {
   padding: 10px 20px;
-  color: #fff;
+  color: var(--white-color);
   background-color: var(--theme-active-color);
   &:hover {
     background-color: var(--theme-dark-active-color);
@@ -50,7 +50,7 @@
   bottom: 0;
   content: " ";
   position: absolute;
-  background-color: #efefef;
+  background-color: var(--theme-border-color);
 }
 
 /*------ pricing filter slider start ------*/
@@ -64,17 +64,17 @@
 }
 .price-range-wrap .price-range.ui-widget-content {
   border: none;
-  background: #eeeeee;
+  background: var(--theme-surface-muted);
   height: 6px;
   border-radius: 20px;
 }
 .price-range-wrap .price-range.ui-widget-content .ui-slider-range {
-  background-color: #c29958;
+  background-color: var(--theme-active-color);
   border-radius: 0;
 }
 .price-range-wrap .price-range.ui-widget-content .ui-slider-handle {
   border: none;
-  background-color: #fff;
+  background-color: var(--white-color);
   height: 12px;
   width: 12px;
   outline: none;
@@ -90,22 +90,22 @@
   width: 6px;
   height: 6px;
   position: absolute;
-  background-color: #c29958;
+  background-color: var(--theme-active-color);
   border-radius: 50%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .price-range-wrap .range-slider {
-  color: #222222;
+  color: var(--theme-text-strong);
   margin-top: 30px;
 }
 .price-range-wrap .range-slider .price-input label {
-  color: #222222;
+  color: var(--theme-text-strong);
   margin-bottom: 0;
 }
 .price-range-wrap .range-slider .price-input input {
-  color: #555555;
+  color: var(--theme-text-color);
   border: none;
   outline: none;
   max-width: 80px;
@@ -113,23 +113,23 @@
 }
 .price-range-wrap .range-slider button.filter-btn {
   border: none;
-  color: #222222;
+  color: var(--theme-text-strong);
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;
   text-transform: uppercase;
   padding: 4px 15px;
   border-radius: 3px;
-  background-color: #ebebeb;
+  background-color: var(--theme-divider-muted);
 }
 .price-range-wrap .range-slider button.filter-btn:hover {
-  color: #fff;
-  background-color: #c29958;
+  color: var(--white-color);
+  background-color: var(--theme-active-color);
 }
 
 /*------ pricing filter slider end ------*/
 .categories-list li {
-  color: #555555;
+  color: var(--theme-text-color);
   margin-bottom: 20px;
   text-transform: capitalize;
 }
@@ -137,7 +137,7 @@
   margin-bottom: 0;
 }
 .categories-list li:hover {
-  color: #c29958;
+  color: var(--theme-active-color);
 }
 
 /*------ shop categories area start ------*/
@@ -145,7 +145,7 @@
   margin-top: -4px;
 }
 .shop-categories li a {
-  color: #555555;
+  color: var(--theme-text-color);
   display: block;
   line-height: 1;
   padding: 10px 0;
@@ -158,7 +158,7 @@
   padding-bottom: 0;
 }
 .shop-categories li:hover a {
-  color: #c29958;
+  color: var(--theme-active-color);
 }
 
 @media (max-width: 786px) {

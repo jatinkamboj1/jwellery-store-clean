@@ -26,7 +26,7 @@
     text-transform: capitalize;
 
     a {
-        color: #222222;
+        color: var(--theme-text-strong);
         display: block;
 
         &:hover {
@@ -42,7 +42,7 @@
         font-size: 13px;
         line-height: 1;
         font-weight: 400;
-        color: #777;
+        color: var(--theme-muted-text);
 
         a {
             color: var(--theme-active-color);
@@ -99,7 +99,7 @@
 }
 
 .blog-list-inner .blog-post-item .blog-content .blog-read-more {
-    color: #222222;
+    color: var(--theme-text-strong);
     display: inline-block;
     margin-top: 10px;
 
@@ -155,7 +155,7 @@
         height: 1px;
         bottom: -10px;
         left: 0;
-        background-color: #efefef;
+        background-color: var(--theme-border-color);
         content: "";
         position: absolute;
     }
@@ -164,9 +164,9 @@
 /* Search bar styling */
 .blog-sidebar .search-field {
     width: calc(100% - 50px);
-    border: 1px solid #ccc;
+    border: 1px solid var(--theme-border-medium);
     padding: 0 10px;
-    color: #555555;
+    color: var(--theme-text-color);
     font-size: 14px;
     height: 50px;
     float: left;
@@ -179,14 +179,14 @@
     margin-left: -4px;
     text-align: center;
     cursor: pointer;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
+    background-color: var(--theme-surface-muted);
+    border: 1px solid var(--theme-border-medium);
     transition: 0.4s;
 
     i {
         font-size: 20px;
         line-height: 50px;
-        color: #222222;
+        color: var(--theme-text-strong);
         transition: 0.4s;
     }
 
@@ -195,7 +195,7 @@
         border-color: var(--theme-active-color);
 
         i {
-            color: #fff;
+            color: var(--white-color);
         }
     }
 }
@@ -205,7 +205,7 @@
     margin-top: -10px;
 
     li a {
-        color: #555555;
+        color: var(--theme-text-color);
         font-size: 14px;
         line-height: 1;
         text-transform: capitalize;
@@ -233,15 +233,15 @@
 }
 
 .blog-sidebar .blog-tags li a {
-    color: #222222;
+    color: var(--theme-text-strong);
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--theme-border-medium);
     padding: 6px 15px 4px;
     display: inline-block;
     text-transform: capitalize;
 
     &:hover {
-        color: #fff;
+        color: var(--white-color);
         background-color: var(--theme-active-color);
         border-color: var(--theme-active-color);
     }
@@ -275,7 +275,7 @@
         text-transform: capitalize;
 
         a {
-            color: #222222;
+            color: var(--theme-text-strong);
 
             &:hover {
                 color: var(--theme-active-color);

@@ -1,6 +1,6 @@
 /*----- footer area start -----*/
 .footer-top {
-  background-color: #f3f3f3;
+  background-color: var(--theme-surface-soft);
   // background-color: var(--theme-ul-active-color);
   
   @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (max-width: 767.98px) {
@@ -34,7 +34,7 @@
     }
 
     a {
-      color: #000;
+      color: var(--theme-text-black);
       font-size: 0.8rem;
 
       &:hover {
@@ -51,7 +51,7 @@
   span {
     font-weight: 600;
     font-size: 0.8rem;
-    color: #8c8c8c;
+    color: var(--theme-text-light);
   }
   a {
     font-size: 0.8rem;
@@ -67,7 +67,7 @@
 
     a {
       font-size: 14px;
-      color: #555555;
+      color: var(--theme-text-color);
       text-transform: capitalize;
 
       &:hover {
@@ -86,19 +86,19 @@
     font-size: 18px;
     line-height: 40px;
     margin-right: 10px;
-    color: #777777;
+    color: var(--theme-muted-text);
     display: inline-block;
     text-align: center;
-    background-color: #fff;
+    background-color: var(--white-color);
     border-radius: 50%;
-    border: 1px solid #dedede;
+    border: 1px solid var(--theme-border-strong);
 
     &:last-child {
       margin-right: 0;
     }
 
     &:hover {
-      color: #fff;
+      color: var(--white-color);
       background-color: var(--theme-dark-active-color);
       border-color: var(--theme-dark-active-color);
     }
@@ -124,10 +124,10 @@
     height: 40px;
     border: none;
     padding: 10px 0;
-    color: #777777;
+    color: var(--theme-muted-text);
     padding-right: 80px;
     background-color: transparent;
-    border-bottom: 1px solid #bcbcbc;
+    border-bottom: 1px solid var(--theme-text-lighter);
   }
 
   .news-btn {
@@ -140,7 +140,7 @@
     color: var(--theme-dark-active-color);
 
     &:hover {
-      color: #222222;
+      color: var(--theme-text-strong);
     }
   }
 }
@@ -186,7 +186,7 @@
 
 .scroll-top i {
   line-height: 50px;
-  color: #fff;
+  color: var(--white-color);
   font-size: 25px;
 }
 
@@ -197,7 +197,7 @@
 }
 
 .scroll-top:hover {
-  background-color: #222222;
+  background-color: var(--theme-text-strong);
 }
 
 @media (max-width: 767.98px) {
@@ -218,7 +218,7 @@
 
 .off-canvas-contact-widget {
   li {
-    color: #555555;
+    color: var(--theme-text-color);
     font-size: 15px;
     margin-bottom: 5px;
 
@@ -227,7 +227,7 @@
     }
 
     a {
-      color: #555555;
+      color: var(--theme-text-color);
 
       &:hover {
         color: var(--theme-dark-active-color);
@@ -240,7 +240,7 @@
   margin-top: 20px;
 
   a {
-    color: #555555;
+    color: var(--theme-text-color);
     font-size: 18px;
     display: inline-block;
     margin-right: 15px;
@@ -256,13 +256,13 @@
   position: relative;
 
   input {
-    color: #666;
+    color: var(--theme-text-light);
     font-size: 13px;
     width: 100%;
     height: 40px;
     border: none;
     padding: 0 40px 0 10px;
-    background-color: #f2f2f2;
+    background-color: var(--theme-surface-subtle);
   }
 
   .search-btn {
@@ -272,7 +272,7 @@
     height: 40px;
     line-height: 42px;
     font-size: 20px;
-    color: #222222;
+    color: var(--theme-text-strong);
     position: absolute;
 
     &:hover {
@@ -285,7 +285,7 @@
 .mobile-settings {
   padding-top: 15px;
   margin-top: 15px;
-  border-top: 1px solid #efefef;
+  border-top: 1px solid var(--theme-border-color);
 
   li {
     margin-bottom: 5px;
@@ -297,7 +297,7 @@
     .mobile-top-dropdown {
       .dropdown-toggle {
         font-size: 14px;
-        color: #555555;
+        color: var(--theme-text-color);
         cursor: pointer;
 
         i {
@@ -317,7 +317,7 @@
 
       .dropdown-menu {
         padding: 0;
-        border-color: #efefef;
+        border-color: var(--theme-border-color);
         -webkit-transform: translateY(30px);
         -ms-transform: translateY(30px);
         transform: translateY(30px);
@@ -333,7 +333,7 @@
 
         .dropdown-item {
           font-size: 13px;
-          color: #555555;
+          color: var(--theme-text-color);
           padding: 6px 15px;
         }
       }
@@ -383,7 +383,7 @@
     height: 50px;
     text-align: center;
     background-color: var(--theme-dark-active-color);
-    color: #fff;
+    color: var(--white-color);
     font-size: 50px;
     cursor: pointer;
     top: 0;
@@ -412,7 +412,7 @@
     width: 100%;
     max-width: 375px;
     position: absolute;
-    background-color: #fff;
+    background-color: var(--white-color);
     -webkit-transform: translateX(calc(100% + 50px));
     -ms-transform: translateX(calc(100% + 50px));
     transform: translateX(calc(100% + 50px));
@@ -430,12 +430,12 @@
   }
 
   .minicart-item-wrapper {
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid var(--theme-border-color);
 
     ul li {
       padding-bottom: 20px;
       margin-bottom: 20px;
-      border-bottom: 1px solid #efefef;
+      border-bottom: 1px solid var(--theme-border-color);
 
       &:last-child {
         border-bottom: none;
@@ -469,27 +469,27 @@
     .product-price {
       font-size: 15px;
       font-weight: 700;
-      color: #666;
+      color: var(--theme-text-light);
     }
 
     .product-quantity {
       font-size: 14px;
-      color: #666;
+      color: var(--theme-text-light);
     }
   }
 
   .minicart-footer {
-    border-top: 1px solid #efefef;
+    border-top: 1px solid var(--theme-border-color);
     padding-top: 20px;
   }
 }
 /*------ twitter feed start ------*/
 .twitter-feed-content {
   padding: 32px 0;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid var(--theme-border-color);
 
   p {
-    color: #888;
+    color: var(--theme-text-light);
 
     a {
       color: var(--theme-dark-active-color);

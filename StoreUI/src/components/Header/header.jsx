@@ -86,17 +86,11 @@ const Header = () => {
                     <div className="container">
                         <div className="row align-items-center justify-content-between position-relative px-4">
                             <div className="col-lg-2">
-                                {/* <div className="logo">
-                                    <a href="/">
-                                        <img src="/assets/logo1.png" alt="Brand Logo" style={{filter: "invert(1)"}} />
-                                    </a>
-                                </div> */}
                                 <div className="logo">
     <a href={session?.user?.role === "ADMIN" ? "/admin" : "/"}>
         <img
             src="/assets/logo1.png"
             alt="Brand Logo"
-            style={{ filter: "invert(1)" }}
         />
     </a>
 </div>
@@ -175,17 +169,11 @@ const Header = () => {
                     <div className="row align-items-center">
                         <div className="col-12">
                             <div className="mobile-main-header">
-                                {/* <div className="mobile-logo">
-                                    <a href="/">
-                                        <img src="/assets/logo1.png" alt="Brand Logo" style={{filter: "invert(1)"}} />
-                                    </a>
-                                </div> */}
                                 <div className="mobile-logo">
     <a href={session?.user?.role === "ADMIN" ? "/admin" : "/"}>
         <img
             src="/assets/logo1.png"
             alt="Brand Logo"
-            style={{ filter: "invert(1)" }}
         />
     </a>
 </div>

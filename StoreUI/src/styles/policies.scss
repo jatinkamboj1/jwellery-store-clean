@@ -1,6 +1,6 @@
 /*------ service policy start ------*/
 .policy-block {
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid var(--theme-border-color);
   }
   
   .policy-item {
@@ -44,7 +44,7 @@
   }
   
   .policy-content p {
-    color: #777;
+    color: var(--theme-muted-text);
     padding-top: 0px;
   }
   /*------ service policy end ------*/

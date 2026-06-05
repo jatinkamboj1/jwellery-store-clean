@@ -55,7 +55,7 @@ const SocialHeader = () => {
         </div>
         <div className="hidden sm:flex items-center gap-2 text-gray-700 text-sm whitespace-nowrap">
           <span className="font-semibold">Contact Us:</span>
-          <a 
+          <a
             href="mailto:weddingtouchbysaadgi@gmail.com"
             className="hover:text-blue-600 transition-colors"
           >

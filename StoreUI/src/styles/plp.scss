@@ -21,7 +21,7 @@
     }
 
     a {
-      color: #b6b6b6;
+      color: var(--theme-text-lighter);
       display: inline-block;
       text-align: center;
       margin-right: 10px;
@@ -43,7 +43,7 @@
 
   .product-amount {
     p {
-      color: #777;
+      color: var(--theme-muted-text);
       font-size: 14px;
       text-transform: capitalize;
     }
@@ -102,8 +102,8 @@
   &:after {
     height: 6px;
     width: 6px;
-    border-bottom: 1px solid #999;
-    border-right: 1px solid #999;
+    border-bottom: 1px solid var(--theme-text-lighter);
+    border-right: 1px solid var(--theme-text-lighter);
   }
 }
 
@@ -213,7 +213,7 @@
       padding: 10px 0 12px;
 
       a {
-        color: #222222;
+        color: var(--theme-text-strong);
         font-weight: 400;
 
         &:hover {
@@ -225,7 +225,7 @@
     p {
       padding-top: 15px;
       margin-top: 22px;
-      border-top: 1px solid #efefef;
+      border-top: 1px solid var(--theme-border-color);
     }
   }
 }
@@ -259,7 +259,7 @@
     bottom: -100%; /* Hide the sidebar by default (off the left side) */
     width: 100%; /* Adjust width as needed */
     height: 100%;
-    background-color: #fff;
+    background-color: var(--white-color);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow on the right side */
     transition: left 0.3s ease-in-out; /* Transition for left property */
     z-index: 2000; /* Ensure it's above other content */

@@ -1,6 +1,6 @@
 /*----- breadcrumb style css start -----*/
 .breadcrumb-area {
-    background-color: #f5f5f5;
+    background-color: var(--theme-surface-muted);
   }
   
   .breadcrumb-wrap {
@@ -21,17 +21,17 @@
             align-items: center;
   }
   .breadcrumb-wrap .breadcrumb .breadcrumb-item a {
-    color: #222222;
+    color: var(--theme-text-strong);
     font-size: 14px;
     font-weight: 400;
     line-height: 1;
     text-transform: capitalize;
   }
   .breadcrumb-wrap .breadcrumb .breadcrumb-item a:hover {
-    color: #c29958;
+    color: var(--theme-active-color);
   }
   .breadcrumb-wrap .breadcrumb .breadcrumb-item:before {
-    color: #7e7e7e;
+    color: var(--theme-text-light);
     content: "/";
     font-size: 12px;
     margin: 0 5px;
@@ -40,7 +40,7 @@
     display: none;
   }
   .breadcrumb-wrap .breadcrumb .breadcrumb-item.active {
-    color: #c29958;
+    color: var(--theme-active-color);
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;

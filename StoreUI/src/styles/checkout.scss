@@ -1,10 +1,10 @@
 /* Checkout Login Coupon Accordion Start */
 .address-select {
-  color: #555555;
-  border: 1px solid #ccc;
+  color: var(--theme-text-color);
+  border: 1px solid var(--theme-border-medium);
   padding: 12px 10px;
   font-size: 14px;
-  background: #f7f7f7;
+  background: var(--theme-surface-muted);
   margin-left: 10px;
   &:focus {
     outline: none;
@@ -23,7 +23,7 @@
     margin-bottom: 46px;
   
     h6 {
-      background-color: #f7f7f7;
+      background-color: var(--theme-surface-muted);
       border-top: 3px solid var(--theme-active-color);
       font-size: 14px;
       padding: 15px 20px;
@@ -43,7 +43,7 @@
         }
   
         &:hover {
-          color: #222222;
+          color: var(--theme-text-strong);
         }
       }
   
@@ -63,7 +63,7 @@
       }
   
       .card-body {
-        border: 1px solid #ccc;
+        border: 1px solid var(--theme-border-medium);
         font-size: 14px;
         padding: 20px;
   
@@ -73,8 +73,8 @@
   
           .apply-coupon-wrapper input {
             padding: 12px 10px;
-            background-color: #f7f7f7;
-            border: 1px solid #ccc;
+            background-color: var(--theme-surface-muted);
+            border: 1px solid var(--theme-border-medium);
             margin-right: 15px;
   
             @media only screen and (max-width: 479.98px) {
@@ -96,7 +96,7 @@
   }
   
   .checkout-title {
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid var(--theme-border-color);
     padding-bottom: 15px;
     margin-bottom: 30px;
   
@@ -134,12 +134,12 @@
   }
   
   .order-summary-table {
-    background-color: #f7f7f7;
+    background-color: var(--theme-surface-muted);
     margin-top: 34px;
   
     .table,
     table {
-      color: #222222;
+      color: var(--theme-text-strong);
       margin-bottom: 0;
       font-size: 15px;
       white-space: nowrap;
@@ -159,7 +159,7 @@
     .table tr th a,
     table tr td a,
     table tr th a {
-      color: #222222;
+      color: var(--theme-text-strong);
       font-weight: 400;
     }
   
@@ -188,7 +188,7 @@
   }
   
   .order-payment-method {
-    background-color: #f7f7f7;
+    background-color: var(--theme-surface-muted);
     padding: 40px 20px 30px;
   
     @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -220,8 +220,8 @@
       }
   
       .payment-method-details {
-        background-color: #f1f1f1;
-        color: #222222;
+        background-color: var(--theme-surface-soft);
+        color: var(--theme-text-strong);
         font-weight: 400;
         font-size: 13px;
         padding: 10px;
@@ -234,7 +234,7 @@
           position: absolute;
           border-left: 10px solid transparent;
           border-right: 10px solid transparent;
-          border-bottom: 10px solid #f1f1f1;
+          border-bottom: 10px solid var(--theme-surface-soft);
           bottom: 100%;
         }
   
