@@ -12,7 +12,9 @@ export default async function Layout({children}) {
   if (!session) {
     redirect("/signin");
   }
-  if (session.user.role === "user") {
+  if (session.user.role === "user") 
+  if (session.user.role?.toUpperCase() === "USER" ){
+
     redirect("/my-account");
   }
   

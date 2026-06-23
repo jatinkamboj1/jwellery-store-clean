@@ -86,17 +86,11 @@ const Header = () => {
                     <div className="container">
                         <div className="row align-items-center justify-content-between position-relative px-4">
                             <div className="col-lg-2">
-                                {/* <div className="logo">
-                                    <a href="/">
-                                        <img src="/assets/logo1.png" alt="Brand Logo" style={{filter: "invert(1)"}} />
-                                    </a>
-                                </div> */}
                                 <div className="logo">
-    <a href={session?.user?.role === "admin" ? "/admin" : "/"}>
+    <a href={session?.user?.role === "ADMIN" ? "/admin" : "/"}>
         <img
             src="/assets/logo1.png"
             alt="Brand Logo"
-            style={{ filter: "invert(1)" }}
         />
     </a>
 </div>
@@ -112,13 +106,16 @@ const Header = () => {
                                     <div className="header-configure-area">
                                         {isLoggedIn ?(
                                             <ul className="nav justify-content-end">
+                                                {session?.user?.role?.toUpperCase() !== "ADMIN" && (
+
                                                 <li>
                                                    
                                                     <a href="/wishlist">
                                                         <i className="pe-7s-like"></i>
-                                                        <div className="notification">{wishlist.length ?? 0}</div>
+                                                        <div className="notification">{wishlist?.length ?? 0}</div>
                                                     </a>
                                                 </li>
+                                                )}
                                                 <li>
                                                 <a href="/cart" className="minicart-btn">
                                                         <i className="pe-7s-shopbag"></i>
@@ -172,17 +169,11 @@ const Header = () => {
                     <div className="row align-items-center">
                         <div className="col-12">
                             <div className="mobile-main-header">
-                                {/* <div className="mobile-logo">
-                                    <a href="/">
-                                        <img src="/assets/logo1.png" alt="Brand Logo" style={{filter: "invert(1)"}} />
-                                    </a>
-                                </div> */}
                                 <div className="mobile-logo">
-    <a href={session?.user?.role === "admin" ? "/admin" : "/"}>
+    <a href={session?.user?.role === "ADMIN" ? "/admin" : "/"}>
         <img
             src="/assets/logo1.png"
             alt="Brand Logo"
-            style={{ filter: "invert(1)" }}
         />
     </a>
 </div>
@@ -195,12 +186,14 @@ const Header = () => {
                                                 <div className="notification">{cartCount ?? 0}</div>
                                             </a>
                                         </div>
+                                        {session?.user?.role?.toUpperCase() !== "ADMIN" && (
                                         <div className="mini-cart-wrap mx-2 d-none d-md-block">
                                             <a href="/wishlist">
                                                 <i className="pe-7s-like"></i>
                                                 <div className="notification">{wishlist.length ?? 0}</div>
                                             </a>
                                         </div>
+                                        )}
                                         <div className="mini-cart-wrap mx-2 d-none d-md-block">
                                             <a href="/my-account">
                                                 <i className="pe-7s-user"></i>
@@ -323,12 +316,20 @@ const Header = () => {
                             <div className="header-configure-area">
                                 {isLoggedIn ?(
                                     <ul className="nav justify-content-evenly">
-                                        <li style={{margin:0}}>
+                                        {/* <li style={{margin:0}}>
                                             <a href="/wishlist">
                                                 <i className="pe-7s-like"></i>
                                                 <div className="notification">{wishlist.length ?? 0}</div>
                                             </a>
-                                        </li>
+                                        </li> */}
+                                        {session?.user?.role?.toUpperCase() !== "ADMIN" && (
+                                            <li style={{margin:0}}>
+                                                <a href="/wishlist">
+                                                    <i className="pe-7s-like"></i>
+                                                    <div className="notification">{wishlist.length ?? 0}</div>
+                                                </a>
+                                            </li>
+                                        )}
                                         <li style={{margin:0}}>
                                             <a href="/cart" className="minicart-btn">
                                                 <i className="pe-7s-shopbag"></i>

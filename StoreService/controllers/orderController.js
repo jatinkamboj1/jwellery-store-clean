@@ -33,7 +33,7 @@ exports.getOrders = async (req, res) => {
     const asc = req.query.asc?.toLowerCase() === "true" ? "asc" : "desc";
 
     const title = req.query.title;
-    let orderBy;
+    let orderBy = { createdAt: "desc" };
     if (title === "userId") {
       title;
       orderBy = {
@@ -49,9 +49,9 @@ exports.getOrders = async (req, res) => {
         },
       };
     }
-    if (title !== "userId" && title !== "quantity") {
-      orderBy = { [title]: asc };
-    }
+if (title && title !== "userId" && title !== "quantity") {
+  orderBy = { [title]: asc };
+}
     //console.log("orderBy: ", orderBy);
     delete filters.currentPage;
     delete filters.limit;

@@ -7,7 +7,7 @@
 blockquote {
     border-left: 5px solid var(--theme-active-color);
     margin: 25px 32px 25px 30px;
-    background-color: #f8f8f8;
+    background-color: var(--theme-surface-muted);
     padding: 15px;
 }
 
@@ -36,8 +36,8 @@ blockquote {
 .blog-post-item .tag-line {
     padding: 10px 0;
     margin-top: 20px;
-    border-top: 1px solid #efefef;
-    border-bottom: 1px solid #efefef;
+    border-top: 1px solid var(--theme-border-color);
+    border-bottom: 1px solid var(--theme-border-color);
 
     h6 {
         font-size: 14px;
@@ -47,7 +47,7 @@ blockquote {
 
     a {
         font-size: 13px;
-        color: #222222;
+        color: var(--theme-text-strong);
 
         &:hover {
             color: var(--theme-active-color);
@@ -78,39 +78,39 @@ blockquote {
         line-height: 36px;
         text-align: center;
         display: inline-block;
-        color: #fff;
+        color: var(--white-color);
         border-radius: 50%;
         margin-right: 5px;
 
         &.facebook {
-            background-color: #3B5999;
+            background-color: var(--theme-social-facebook);
 
             &:hover {
-                background-color: #2d4474;
+                background-color: var(--theme-social-facebook-dark);
             }
         }
 
         &.twitter {
-            background-color: #1DA1F2;
+            background-color: var(--theme-social-twitter);
 
             &:hover {
-                background-color: #0c85d0;
+                background-color: var(--theme-social-twitter-dark);
             }
         }
 
         &.pinterest {
-            background-color: #CB2028;
+            background-color: var(--theme-social-pinterest);
 
             &:hover {
-                background-color: #9f191f;
+                background-color: var(--theme-social-pinterest-dark);
             }
         }
 
         &.google {
-            background-color: #fe6d4c;
+            background-color: var(--theme-social-youtube);
 
             &:hover {
-                background-color: #fe4419;
+                background-color: var(--theme-social-youtube-dark);
             }
         }
     }
@@ -140,7 +140,7 @@ blockquote {
             display: flex;
             padding: 10px 20px;
             margin-bottom: 30px;
-            border: 1px solid #efefef;
+            border: 1px solid var(--theme-border-color);
 
             &:last-child {
                 margin-bottom: 5px;
@@ -167,7 +167,7 @@ blockquote {
                 }
 
                 .comment-post-date {
-                    color: #555555;
+                    color: var(--theme-text-color);
                     padding-bottom: 10px;
                 }
 
@@ -175,16 +175,16 @@ blockquote {
                     float: right;
 
                     a {
-                        color: #222222;
+                        color: var(--theme-text-strong);
                         font-size: 12px;
                         display: inline-block;
                         padding: 4px 15px;
                         border-radius: 20px;
                         text-transform: capitalize;
-                        border: 1px solid #efefef;
+                        border: 1px solid var(--theme-border-color);
 
                         &:hover {
-                            color: #fff !important;
+                            color: var(--white-color) !important;
                             border-color: var(--theme-active-color);
                             background-color: var(--theme-active-color);
                         }
@@ -216,13 +216,13 @@ blockquote {
     margin-top: -10px;
 
     h3 {
-        color: #222222;
+        color: var(--theme-text-strong);
         font-size: 18px;
         line-height: 1;
         font-weight: 500;
         padding-bottom: 15px;
         text-transform: uppercase;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--theme-border-color);
     }
 
     p {
@@ -232,7 +232,7 @@ blockquote {
 
     .comment-post-box {
         label {
-            color: #222222;
+            color: var(--theme-text-strong);
             font-weight: 500;
             margin-bottom: 10px;
             display: block;
@@ -240,9 +240,9 @@ blockquote {
         }
 
         .coment-field {
-            background: #f8f8f8;
+            background: var(--theme-surface-muted);
             border: none;
-            color: #555555;
+            color: var(--theme-text-color);
             padding: 8px 10px;
             width: 100%;
 
@@ -256,7 +256,7 @@ blockquote {
             margin-bottom: 20px;
             padding: 10px;
             width: 100%;
-            background: #f8f8f8;
+            background: var(--theme-surface-muted);
             border: none;
         }
 
@@ -295,7 +295,7 @@ blockquote {
     text-transform: capitalize;
 
     a {
-        color: #222222;
+        color: var(--theme-text-strong);
         display: block;
 
         &:hover {
@@ -311,7 +311,7 @@ blockquote {
         font-size: 13px;
         line-height: 1;
         font-weight: 400;
-        color: #777;
+        color: var(--theme-muted-text);
 
         a {
             color: var(--theme-active-color);

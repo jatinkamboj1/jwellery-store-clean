@@ -4,6 +4,7 @@ import Header from "@/components/Header/header";
 import SocialHeader from "@/components/Header/SocialHeader";
 import Breadcrumbs from "@/components/Breadcrumbs/breadcrumbs";
 import "@/styles/header.scss";
+import "@/styles/SocialHeader.scss";
 import "@/styles/footer.scss";
 import "@/styles/breadcrumb.scss";
 

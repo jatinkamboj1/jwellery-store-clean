@@ -37,7 +37,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--theme-divider-muted);
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
@@ -74,7 +74,7 @@
 }
 
 .stockStatus {
-  color: #38a169;
+  color: var(--theme-success-color);
   font-weight: 600;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .quantityButton {
-  background-color: #e2e8f0;
+  background-color: var(--theme-divider-muted);
   color: #4a5568;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
@@ -102,7 +102,7 @@
 .quantityInput {
   width: 3rem;
   text-align: center;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--theme-divider-muted);
   border-radius: 0.25rem;
   padding: 0.25rem;
 }
@@ -166,12 +166,12 @@
   color: #2d3748;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--theme-divider-muted);
 }
 
 .savingsMessage {
   font-size: 0.875rem;
-  color: #38a169;
+  color: var(--theme-success-color);
   margin-top: 1rem;
   text-align: center;
 }
@@ -184,8 +184,8 @@
 
 .applyButton {
   padding: 8px;
-  background: #007bff;
-  color: #fff;
+  background: var(--theme-active-color);
+  color: var(--white-color);
   border: none;
   cursor: pointer;
 }
@@ -205,7 +205,7 @@
   left: 50%;
   transform: translateX(-50%);
   background: #333;
-  color: #fff;
+  color: var(--white-color);
   padding: 10px 20px;
   border-radius: 8px;
   z-index: 9999;
@@ -214,7 +214,7 @@
 }
 
 .btn-cart2:disabled {
-  background: #ccc;
+  background: var(--theme-border-medium);
   cursor: not-allowed;
   opacity: 0.6;
 }
